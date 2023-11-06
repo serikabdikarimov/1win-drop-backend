@@ -10,7 +10,7 @@ php artisan key:generate
 
 # Загрузите переменные окружения из .env файла
 # Путь к .env файлу
-env_file=".env"
+$env_file = ".env"
 
 if (Test-Path -Path "$env_file" -PathType Leaf) {
     # Если файл существует, выполните код в этом блоке
@@ -22,19 +22,19 @@ else {
 }
 
 # Запрос значений для db_user, db_password и db_name
-Write-Host "Введите название базы данных:"
+Write-Host "Введите название базы данных (DB_NAME):"
 $new_db_name = Read-Host
 
-Write-Host "Введите имя пользователя:"
+Write-Host "Введите имя пользователя (DB_USERNAME):"
 $new_db_user = Read-Host
 
-Write-Host "Введите пароль:"
+Write-Host "Введите пароль (DB_PASSWORD):"
 $new_db_password = Read-Host
 
 # Обновляем переменные окружения в .env файле
-Set-Content -Path $env_file -Value "DB_USER=$new_db_user"
-Set-Content -Path $env_file -Value "DB_PASSWORD=$new_db_password"
-Set-Content -Path $env_file -Value "DB_NAME=$new_db_name"
+Add-Content -Path $env_file -Value "DB_DATABASE=$new_db_name"
+Add-Content -Path $env_file -Value "DB_USERNAME=$new_db_user"
+Add-Content -Path $env_file -Value "DB_PASSWORD=$new_db_password"
 
 # Обновление Composer
 composer update
