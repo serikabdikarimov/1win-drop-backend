@@ -39,9 +39,11 @@ composer update
 
 # Миграция данных
 php artisan migrate
+echo "Миграция заыершена"
 
 # Сидим данные
 php artisan db:seed
+echo "Данные добавлены"
 
 # Вывод сообщения об успешном обновлении
 echo "Репозиторий и Composer обновлены."
