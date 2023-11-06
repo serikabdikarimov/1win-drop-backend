@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\SiteSetting;
+//use App\Models\SiteSetting;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$siteType = SiteSetting::pluck('site_type')->first();
+//$siteType = SiteSetting::pluck('site_type')->first();
 
 Route::get('/captcha_image', [App\Http\Controllers\CaptchaController::class, 'generateCaptchaImage']);
 
-if ($siteType === 'multi_domain') {
+//if ($siteType === 'multi_domain') {
     Route::middleware('webdomain')->group(function () {
         Route::get('/', [App\Http\Controllers\Frontend\PagesController::class, 'homePage'])->name('home-page');
         Route::get('/sitemap.xml', [App\Http\Controllers\Frontend\SitemapController::class, 'index'])->name('index');
@@ -47,8 +47,8 @@ if ($siteType === 'multi_domain') {
         Route::get('/{slug}', [App\Http\Controllers\Frontend\PagesController::class, 'page'])->name('page');
         
     });
-} elseif ($siteType === 'multi_language') {
-    Route::prefix('{language}')->group(function () {
+//} elseif ($siteType === 'multi_language') {
+//    Route::prefix('{language}')->group(function () {
         // Здесь определите роуты для мультиязычного сайта
-    });
-}
+//    });
+//}
