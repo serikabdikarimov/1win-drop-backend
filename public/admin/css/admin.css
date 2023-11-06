@@ -1,0 +1,298 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+#file-manager-modal {
+    z-index: 9999;
+}
+
+#file-manager-modal .modal-dialog {
+    max-width: calc(100% - 3.5rem);
+}
+#uploadNewFile {
+    background-color: rgba(0,0,0,0.8);
+    z-index: 9999;
+}
+
+#uploadNewFile .modal-dialog {
+    max-width: calc(100% - 60rem);
+}
+
+/* custom styles */
+section {
+    background-color: #ffffff;
+}
+
+#gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.image-container {
+    padding: 3px;
+    height: auto;
+    position: relative;
+    list-style: none;
+    vertical-align: middle;
+    display: grid;
+    align-items: center;
+    border: 2px solid hsla(222,4%,45%,.16);
+    border-radius: 8px;
+    margin: 5px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,.1), inset 0 0 0 1px rgba(0,0,0,.05);
+    background: #f0f0f1;
+}
+
+#gallery li.image-container img {
+    max-width: 100%;
+    max-height: 190px;
+    margin: 0 auto;
+}
+
+.projectInfo {
+    display: grid;
+    background-color: rgba(0,0,0, 0.5);
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    align-items: center;
+    opacity: 0;
+    padding: 15px;
+    word-break: break-all;
+
+}
+.image-container .projectInfo p {
+    margin: 0 5px;
+}
+
+.image-container:hover .projectInfo{
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.select2-dropdown.select-index {
+    z-index: 99999;
+}
+
+#select-lang-block-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    box-shadow: inset 0 0 0 transparent;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    cursor: pointer;
+}
+#select-lang-block{
+    display:none;
+    position:absolute;
+    left:0;
+    top: 34px;width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    z-index: 9;
+    cursor: pointer;
+}
+#select-lang-block ul {
+    padding-left: 0px;
+}
+#select-lang-block ul li{
+    padding-left: 10px;
+}
+
+#select-lang-block ul li:hover{
+    color: #fff;
+    background: #007bff;
+
+}
+
+.select2 {
+    width: 100% !important;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    box-shadow: inset 0 0 0 transparent;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.select2-selection__rendered {
+    background-color: #fff;
+}
+.select2-selection__choice {
+    background-color: #e4e4e4;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 0;
+    padding-left: 20px;
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    white-space: nowrap;
+}
+.select2-container .select2-search--inline .select2-search__field {
+    background: transparent;
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    -webkit-appearance: textfield;
+}
+.select2-selection__choice__remove {
+    background-color: transparent;
+    border: none;
+    border-right: 1px solid #aaa;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    color: #999;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    padding: 0 4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.select2-container--open{
+    z-index: 9999;
+}
+
+div.sticky {
+    text-align: right;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    background: #f4f6f9;
+}
+
+
+.success-icon::before {
+    content: "\f058"; /* Код символа FontAwesome для иконки "check-circle" */
+    font-family: "Font Awesome\ 5 Free"; /* Укажите правильное имя шрифта FontAwesome */
+  }
+  
+  .info-icon::before {
+    content: "\f05a"; /* Код символа FontAwesome для иконки "info-circle" */
+    font-family: "Font Awesome\ 5 Free"; /* Укажите правильное имя шрифта FontAwesome */
+  }
+  
+  .warning-icon::before {
+    content: "\f06a"; /* Код символа FontAwesome для иконки "exclamation" */
+    font-family: "Font Awesome\ 5 Free"; /* Укажите правильное имя шрифта FontAwesome */
+  }
+
+.select2-selection__rendered {
+    color: #444;
+    line-height: 20px !important;
+}
+
+/* Раскрывающийся список */
+
+#galleryCategoriesList {
+    list-style-type: none;
+    padding-left: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+#galleryCategoriesList li {
+    list-style: none;
+    cursor: pointer;
+}
+#galleryCategoriesList ul {
+    padding-left: 10px;
+}
+
+.caret {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+}
+
+.caret::before {
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 1px;
+}
+
+.caret-down::before {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari */
+    transform: rotate(90deg);  
+}
+
+.nested {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+#galleryCategoriesList li {
+    padding: 5px 16px;
+    border-radius: 10px;
+}
+
+#galleryCategoriesList li.active {
+    color: #000;
+    background-color: rgb(220 231 242);
+}
+
+  #select-lang-block-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    box-shadow: inset 0 0 0 transparent;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    cursor: pointer;
+}
+#select-lang-block{
+    display:none;
+    position:absolute;
+    left:0;
+    top: 34px;width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    z-index: 9;
+    cursor: pointer;
+}
+#select-lang-block ul {
+    padding-left: 0px;
+}
+#select-lang-block ul li{
+    padding-left: 10px;
+}
+
+#select-lang-block ul li:hover{
+    color: #fff;
+    background: #007bff;
+
+}
