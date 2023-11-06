@@ -30,9 +30,9 @@ echo "Введите пароль:"
 read new_db_password
 
 # Обновляем переменные окружения в .env файле
-echo "DB_USER=$new_db_user" > "$env_file"
-echo "DB_PASSWORD=$new_db_password" > "$env_file"
-echo "DB_NAME=$new_db_name" > "$env_file"
+echo "DB_USER=$new_db_user" >> "$env_file"
+echo "DB_PASSWORD=$new_db_password" >> "$env_file"
+echo "DB_NAME=$new_db_name" >> "$env_file"
 
 # Обновление Composer
 composer update
