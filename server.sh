@@ -37,5 +37,11 @@ echo "DB_NAME=$new_db_name" > "$env_file"
 # Обновление Composer
 composer update
 
+# Миграция данных
+php artisan migrate
+
+# Сидим данные
+php artisan db:seed
+
 # Вывод сообщения об успешном обновлении
 echo "Репозиторий и Composer обновлены."
