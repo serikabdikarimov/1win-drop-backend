@@ -37,6 +37,10 @@ echo "DB_PASSWORD=$new_db_password" >> "$env_file"
 # Обновление Composer
 composer update
 
+php artisan cache:clear
+php artisan config:clear
+php artisan config:cache
+
 # Миграция данных
 php artisan migrate
 echo "Миграция заыершена"
