@@ -34,12 +34,12 @@ echo "DB_DATABASE=$new_db_name" >> "$env_file"
 echo "DB_USERNAME=$new_db_user" >> "$env_file"
 echo "DB_PASSWORD=$new_db_password" >> "$env_file"
 
-# Обновление Composer
-composer update
-
 php artisan cache:clear
 php artisan config:clear
 php artisan config:cache
+
+# Обновление Composer
+composer update
 
 # Миграция данных
 php artisan migrate
