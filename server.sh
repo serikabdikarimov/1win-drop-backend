@@ -39,7 +39,14 @@ php artisan config:clear
 php artisan config:cache
 
 #2023_09_18_212315_create_site_settings_table
-php artisan migrate --path=database/migrations/2023_09_18_212315_create_site_settings_table.php
+
+mysql -u $new_db_user -p $new_db_password $new_db_name -e "CREATE TABLE site_settings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  site_type ENUM('multi_domain', 'multi_language'),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);"
+
 
 # Обновление Composer
 composer update
