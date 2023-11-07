@@ -36,12 +36,17 @@ Add-Content -Path $env_file -Value "DB_DATABASE=$new_db_name"
 Add-Content -Path $env_file -Value "DB_USERNAME=$new_db_user"
 Add-Content -Path $env_file -Value "DB_PASSWORD=$new_db_password"
 
-mysql -u $new_db_user -p $new_db_password $new_db_name -e "CREATE TABLE site_settings (
+$script = @"
+CREATE TABLE $tableName (
   id INT AUTO_INCREMENT PRIMARY KEY,
   site_type ENUM('multi_domain', 'multi_language'),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);"
+);
+"@
+
+$command = "mysql -u $new_db_user -p $new_db_password $new_db_name -e `"$script`""
+Invoke-Expression $command
 
 # Обновление Composer
 composer update

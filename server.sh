@@ -47,7 +47,6 @@ mysql -u $new_db_user -p $new_db_password $new_db_name -e "CREATE TABLE site_set
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );"
 
-
 # Обновление Composer
 composer update
 
