@@ -37,7 +37,7 @@ Add-Content -Path $env_file -Value "DB_USERNAME=$new_db_user"
 Add-Content -Path $env_file -Value "DB_PASSWORD=$new_db_password"
 
 $script = @"
-CREATE TABLE $tableName (
+CREATE TABLE site_settings (
   id INT AUTO_INCREMENT PRIMARY KEY,
   site_type ENUM('multi_domain', 'multi_language'),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

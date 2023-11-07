@@ -52,7 +52,7 @@ composer update
 
 # Миграция данных
 php artisan migrate
-echo "Миграция заыершена"
+echo "Миграция завершена"
 
 # Сидим данные
 php artisan db:seed
