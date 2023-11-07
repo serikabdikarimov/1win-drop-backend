@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+$siteType = SiteSetting::pluck('site_type')->first();
 
-Route::middleware('webdomain')->group(function () {
-    Route::get('/captcha_image', [App\Http\Controllers\CaptchaController::class, 'generateCaptchaImage']);
-    $siteType = SiteSetting::pluck('site_type')->first();
-    if ($siteType === 'multi_domain') {
+Route::get('/captcha_image', [App\Http\Controllers\CaptchaController::class, 'generateCaptchaImage']);
+
+if ($siteType === 'multi_domain') {
+    Route::middleware('webdomain')->group(function () {
         Route::get('/', [App\Http\Controllers\Frontend\PagesController::class, 'homePage'])->name('home-page');
         Route::get('/sitemap.xml', [App\Http\Controllers\Frontend\SitemapController::class, 'index'])->name('index');
         Route::get('/robots.txt', [App\Http\Controllers\Frontend\RobotsController::class, 'robots'])->name('robots');
@@ -43,9 +44,10 @@ Route::middleware('webdomain')->group(function () {
     
         //Все страницы
         Route::get('/{slug}', [App\Http\Controllers\Frontend\PagesController::class, 'page'])->name('page');
-    } elseif ($siteType === 'multi_language') {
-        Route::prefix('{language}')->group(function () {
-            // Здесь определите роуты для мультиязычного сайта
-        });
-    }
-});
+    
+    });
+} elseif ($siteType === 'multi_language') {
+    Route::prefix('{language}')->group(function () {
+        // Здесь определите роуты для мультиязычного сайта
+    });
+}
