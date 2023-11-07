@@ -38,6 +38,9 @@ php artisan cache:clear
 php artisan config:clear
 php artisan config:cache
 
+#2023_09_18_212315_create_site_settings_table
+php artisan migrate --path=database/migrations/2023_09_18_212315_create_site_settings_table.php
+
 # Обновление Composer
 composer update
 
