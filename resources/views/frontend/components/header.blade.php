@@ -59,7 +59,7 @@
         </button>
     </nav>
     @endif
-    <ul class="header__right">
+    {{-- <ul class="header__right">
         <li class="header__rightItem">
             <button type="button" class="lang-selector" data-micromodal-trigger="modal-lang">
                 <span class="visuallyHidden">{{ __('messages.Выбор языка страницы') }}</span>
@@ -77,5 +77,5 @@
     </ul>
     <button type="button" class="button button--iconOnly burger" aria-expanded="false" data-mobile-menu-toggle="">
         <span class="burger__line"></span>
-    </button>
+    </button> --}}
 </div>
