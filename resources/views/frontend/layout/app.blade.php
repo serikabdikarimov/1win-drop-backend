@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    @if (request()->route()->getName() == 'search')
+    @if (request()->route() $$ request()->route()->getName() == 'search')
         <title>{{__('messages.Результаты поиска по запросу')}} «{{ request('search') }}»</title>
     @else
         <title>{{ isset($page->meta_title) ? $page->meta_title : $settings->site_name }}</title>
     @endif
-    
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (request()->getHost() == env('ADMIN_DOMAIN'))
         <meta name="robots" content="noindex, nofollow">
@@ -76,7 +76,7 @@
             @endif
             @if ($design_settings->text_subdued)
                 --text-subdued: {{ $design_settings->text_subdued }};
-            @endif	
+            @endif
             @if ($design_settings->text_pale)
                 --text-pale: {{ $design_settings->text_pale }};
             @endif
@@ -262,7 +262,7 @@
     <!-- Canonical -->
     <link rel="canonical" href="{{ 'https://' . $domain->domain_name }}{{ $domain->path($domain->id, request()->path()) != null && $domain->path($domain->id, request()->path())->slug != '/' ? '/' . request()->path() : '' }}"/>
     @foreach ($domains as $domain)
-        @if (request()->route()->getName() == 'search')
+        @if (request()->route() && request()->route()->getName() == 'search')
             <link rel="alternate" href="{{ 'https://' . $domain->domain_name . '/search' }}" hreflang="{{ $domain->code }}" />
         @else
             <link rel="alternate" href="{{ 'https://' . $domain->domain_name }}{{ $domain->path($domain->id, request()->path()) != null && $domain->path($domain->id, request()->path())->slug != '/' ? '/' . request()->path() : '' }}" hreflang="{{ $domain->code }}" />
@@ -301,11 +301,11 @@
         <!--/. App Wrapper End -->
 
     </div>
-    
+
     {{--@include('cookie-consent::index')--}}
 
     <!--/. App End -->
-    
+
     <!-- CONTENT ENDS HERE -->
 
     <!-- Main scripts. You can replace it, but I recommend you to leave it here -->
@@ -332,7 +332,7 @@
                                 <span class="mobile-menu__title">
                                     {{ $item->name }}
                                 </span>
-                               
+
                                 <span class="mobile-menu__icon">
                                     <span class="icon icon--sizeMedium">
                                         <svg class="icon__svg" aria-hidden="true">
@@ -367,7 +367,7 @@
                             </div>
                             @endif
                         </li>
-                    
+
                     @endforeach
                 </ul>
                 @endif
@@ -523,7 +523,7 @@
     <!--/. Modal Success End -->
     {{-- start ld+json --}}
 
-    @if( isset($page) && $page->type == 2)  
+    @if( isset($page) && $page->type == 2)
    @php
         //$page->getBrandInWiew((int) $page->type_content_id, request()->getHost());
         $brand = $page->brand;
@@ -551,7 +551,7 @@
                     </svg>
                 </li>
                 @endfor
-                
+
                 <li class="rate__item" role="presentation">{{ round($brand->rating()) }}</li>
         </ul>
         <div class="brand-sticky__actions">
@@ -717,7 +717,7 @@
                 ]
         }
     </script>
-    
+
     {{-- Article Schema --}}
     @if (isset($page) && $page->autor_id && $page->author->page($page->author->id) != null)
     <script type="application/ld+json">
@@ -751,7 +751,7 @@
     @php
         $organization = json_decode($organization->data);
     @endphp
-    
+
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",

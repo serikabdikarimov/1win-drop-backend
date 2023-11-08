@@ -21,7 +21,7 @@
             @include('admin.form-appends.first_showcase')
         </div>
     @endif
-    
+
     <br>
     <span class="btn btn-primary btn-sm add-brand-showcase">
         <i class="fa fa-plus" aria-hidden="true"></i> Добавить бренд
@@ -51,7 +51,7 @@
     {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
 </div> --}}
 <div class="can-sort">
-    @if (isset($page->add_content) && $page->add_content != "null") 
+    @if (isset($page->add_content) && $page->add_content != "null")
         @foreach (json_decode($page->add_content) as $index=>$blocks)
             @if (key($blocks) == 'block')
                 <div class="form-group" data-block-index="{{ $index }}" data-block-name="{{ 'block' }}">
@@ -194,14 +194,14 @@
             @elseif(key((array)$blocks) == 'author')
                 @include('admin.form-appends.author')
             @elseif (key((array)$blocks) == 'static_attributes')
-             
+
                 <div class="form-group" data-block-index="{{ $index }}" data-block-name="{{ 'static_attributes' }}">
                     <label for="" class="control-label">{{ 'Статические атрибуты страницы' }}<span class="error" data-target="delete-item"><i class="far fa-trash-alt"></i></span></label>
                     <div style="float: right; cursor:pointer"><i class="fas fa-arrow-up go-up"></i><i class="fas fa-arrow-down go-down"></i></div>
                     <br>
                         <input type="text" name="add_content[{{ $index }}][static_attributes][title]"  class="form-control" placeholder="Заголовок" value="{{ $blocks->static_attributes->title }}">
                     <br>
-                    
+
                     <div class="plus-minus-add can-sort-items">
                         @foreach($blocks->static_attributes->attribute as $key=>$attribute)
                         <div class="row">
@@ -376,43 +376,3 @@
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Обновить' : 'Создать' }}">
 </div>
-<br>
-@if ($formMode === 'edit')
-    <div class="form-group">
-        <select class="form-control js-example-basic-multiple-lang" name="select_language" id="select-languages" multiple>
-            @foreach($localizationList as $item)
-                <option value="{{ $item->code }}" {{ $item->code == $currentLocalization->code ? 'disabled' : '' }}>{{ $item->domain_name }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="form-group">
-        <span id="copy-page" class="btn btn-success" data-copy-type="page" data-page-id="{{ $page->id }}" data-page-lang="{{ $currentLocalization->code }}">
-            <i class="far fa-copy"></i> Создать копию
-        </span>
-    </div>
-@endif
-<br>
-<div class="card card-info">
-    <div class="card-header">
-        <h3 class="card-title">Информация</h3>
-    </div>
-    <div class="card-body">
-        <p><b>{{ 'Наименование страницы' }}</b> - название страницы для админ панели</p>
-        <p><b>{{ 'Ссылка страницы' }}</b> - url страницы</p>
-        <p><b>{{ 'Заголовок' }}</b> - заголовок страницы H1</p>
-        <p><b>{{ 'Контент' }}</b> - контент сайта, текстовый блок с редактором</p>
-        <br>
-        <p><b>{{ 'Динамический контент:' }}</b></p>
-        <p><b>{{ '+Текстовый блок' }}</b> - позволяет добавить на страницу текстовый блок с редактором</p>
-        <p><b>{{ '+Витрина' }}</b> - позволяет добавить на страницу витрину, далее при помощи кнопки <b>'+Добавить бренд'</b> можно добавить бренды в витрину</p>
-        <p><b>{{ '+Вопрос ответ' }}</b> - позволяет добавить на страницу FAQ блок, далее при помощи кнопки <b>'+Добавить вопрос'</b> можно добавить вопросы и ответы в блок</p>
-        <p><b>{{ '+Плюсы и минусы' }}</b> - позволяет добавить на страницу блок 'Плюсы и минусы', далее при помощи кнопки <b>'+Добавить плюс и минус'</b> можно добавить еще строчку в блок</p>
-        <br>
-        <p><b>{{ 'Тип страницы' }}</b> - При выборе не обычной страницы необходимо выбрать сопутствующий контент (пример если это бренд, то обязательно необходимо выбрать бренд к которому относится страница) </p>
-        <p><b>{{ 'Баннер' }}</b> - Баннер страницы</p>
-
-        <p><b>{{ 'Копирование' }}</b> - эта форма для того чтобы добавить текущие данные на другой язык, для этого выбираем необходимые языки и нажимаем кнопку скопировать</p>
-    </div>
-
-</div>
-
