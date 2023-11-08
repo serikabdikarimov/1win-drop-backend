@@ -44,7 +44,7 @@
                                                 @if ($brand->page($brand->id))
                                                     </a>
                                                 @endif
-                                                
+
                                             </div>
                                             <header class="casino__header">
                                                 @if ($brand->page($brand->id))
@@ -191,7 +191,7 @@
                                                                         @endif
                                                                     </div>
                                                                 @endforeach
-                                                                
+
                                                                 @if (isset($item->comment))
                                                                     <div class="casino__providersItem">{{ $item->comment }}</div>
                                                                 @endif
@@ -203,7 +203,7 @@
                                                                 <div>{{ $item->attribute_item_id }}</div>
                                                             </div>
                                                         @endif
-                                                    
+
                                                     @endforeach
                                                 </div>
                                                 <div class="casino__actions">
@@ -236,7 +236,7 @@
                                             </article>
                                         </li>
                                     @endforeach
-                                </ul>   
+                                </ul>
                             @elseif (key($blocks) == 'login')
                                 <ul class="buttonGroup buttonGroup--distributionCenter">
                                     <li class="buttonGroup__item">
@@ -253,13 +253,14 @@
                             @elseif (key($blocks) == 'block')
                                 <h2>{{ $blocks->block->title }}</h2>
                                 {!! $blocks->block->content !!}
-                            @elseif (key($blocks) == 'faqs') 
+                            @elseif (key($blocks) == 'faqs')
                                 @php
                                     $faqs = (array)$blocks;
                                 @endphp
                                 @foreach($blocks as $question)
                                     <div class="card__body">
                                         <h2 id="{{ \Illuminate\Support\Str::slug($question->faqs_title) }}">{{ $question->faqs_title }}</h2>
+                                        <p>{{ $question->faqs_description }}</p>
                                     </div>
                                     <ul class="faq" data-accordion>
                                         @foreach($question->question as $key=>$item)
@@ -333,7 +334,7 @@
                                             <li class="compare__item">{{ $plus }}</li>
                                         @endif
                                         @endforeach
-                                        
+
                                     </ul>
                                     <ul class="compare__list">
                                         @foreach ($blocks->plus_minus->minus as $minus)
@@ -365,7 +366,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                @if ($blocks->static_attributes->short_description != null) 
+                                @if ($blocks->static_attributes->short_description != null)
                                     <p>{{ $blocks->static_attributes->short_description }}</p>
                                 @endif
                             @elseif (key($blocks) == 'dynamic_attributes')
@@ -402,7 +403,7 @@
                             @endif
                         @endforeach
                     @endif
-                </div>      
+                </div>
         </article>
     </div>
 <!--/. App Layout End -->

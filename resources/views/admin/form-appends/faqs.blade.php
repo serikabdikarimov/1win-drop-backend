@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <input type="text" name="add_content[{{ $index }}][faqs][faqs_description]" class="form-control" placeholder="Описание блока" value="" required>
+                <input type="text" name="add_content[{{ $index }}][faqs][faqs_description]" class="form-control" placeholder="Описание блока" value="">
                 <br>
             </div>
         </div>
