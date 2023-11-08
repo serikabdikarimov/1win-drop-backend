@@ -34,17 +34,17 @@ class DefaultSettingsController extends Controller
         $requestData = $request->all();
 
         $defaultsetting = DefaultSetting::first();
-        
+
         if ($requestData['logo'] != null) {
             $check = strripos($requestData['logo'], "/");
-            
+
             if (is_numeric($check)) {
                 $url = explode('/',$requestData['logo']);
                 $url = $url[3];
             } else {
                 $url = $requestData['logo'];
             }
-            
+
             $imageId = Gallery::where('url', $url)->first();
             $requestData['logo'] = $imageId->id;
         }
@@ -63,7 +63,7 @@ class DefaultSettingsController extends Controller
 
     public function edit($domainId)
     {
-        $defaultsetting = Localization::where('id', $domainId)->first();
+        $defaultsetting = DefaultSetting::where('id', $domainId)->first();
 
         return view('admin.default-settings.edit', compact('domainId', 'defaultsetting'));
     }
@@ -80,7 +80,7 @@ class DefaultSettingsController extends Controller
             } else {
                 $url = $requestData['logo'];
             }
-            
+
             $imageId = Gallery::where('url', $url)->first();
             $requestData['logo'] = $imageId->id;
         }
