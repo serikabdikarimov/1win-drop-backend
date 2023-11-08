@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    @if (request()->route() $$ request()->route()->getName() == 'search')
+    @if (request()->route() && request()->route()->getName() == 'search')
         <title>{{__('messages.Результаты поиска по запросу')}} «{{ request('search') }}»</title>
     @else
         <title>{{ isset($page->meta_title) ? $page->meta_title : $settings->site_name }}</title>

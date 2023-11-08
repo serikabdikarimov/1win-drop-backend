@@ -38,13 +38,13 @@ class PagesController extends Controller
         $page_type = $request->get('page_type');
         $status = $request->get('status');
         $perPage = 25;
-        
+
         $builder = Page::where('locale_id', $domainId)->select('id', 'name', 'updated_at', 'type', 'status');
-        
+
         if ($keyword != null) {
             $builder->where('name', 'LIKE', "%$keyword%");
         }
-        
+
         if ($page_type != null) {
             $builder->where('type', $page_type);
         }
@@ -52,7 +52,7 @@ class PagesController extends Controller
         if ($status != null) {
             $builder->where('status', $status);
         }
-        
+
         $pages = $builder->orderBy('updated_at', 'DESC')->paginate($perPage);
 
         return view('admin.pages.index', compact('pages'));
@@ -79,7 +79,7 @@ class PagesController extends Controller
      */
     public function store(StorePageRequest $request)
     {
-        
+
         $requestData = $request->all();
 
         $domainId = session('locale_id') != null ? session('locale_id') : Localization::defaultDomain();
@@ -98,9 +98,9 @@ class PagesController extends Controller
             $headingContent = $requestData['add_content'];
             $requestData['add_content'] = json_encode($requestData['add_content'], JSON_UNESCAPED_UNICODE);
         }
-        
+
         $requestData['locale_id'] = $domainId;
-        
+
         $page = Page::create($requestData);
 
         if (isset($requestData['add_content'])) {
@@ -159,7 +159,7 @@ class PagesController extends Controller
             } else {
                 $url = $requestData['banner'];
             }
-            
+
             $imageId = Gallery::where('url', $url)->first();
             $requestData['banner'] = $imageId->id;
         }
@@ -177,7 +177,7 @@ class PagesController extends Controller
         } else {
             $requestData['showcase'] = null;
         }
-        
+
         $page = Page::findOrFail($id);
 
         $page->update($requestData);
@@ -204,12 +204,12 @@ class PagesController extends Controller
     public function destroy($id)
     {
         $page = Page::findOrfail($id);
-        
+
         $page->delete();
 
         return redirect('pages')->with('flash_message', 'Page deleted!');
     }
-    
+
     public function editSeo($pageId)
     {
         $page = Page::where('id', $pageId)->select('id', 'name', 'meta_title', 'meta_description', 'meta_keywords')->first();
@@ -228,7 +228,7 @@ class PagesController extends Controller
 
         $page->update($requestData);
 
-        return redirect('pages')->with('flash_message', 'SEO data updated!'); 
+        return redirect('admin/pages')->with('flash_message', 'SEO data updated!');
     }
 
     public function editShowcase($pageId)
@@ -244,13 +244,13 @@ class PagesController extends Controller
     {
         DB::table('brand_page')->insert([
             'page_id' => $pageId,
-            'brand_id' => $request->input('brand_id') 
+            'brand_id' => $request->input('brand_id')
         ]);
-        
+
         return redirect('admin/pages/' . $pageId . '/showcase')->with('flash_message', 'Brand added to showcase!');
     }
 
-    public function deleteShowcaseBrand($pageId, $brandId) 
+    public function deleteShowcaseBrand($pageId, $brandId)
     {
         DB::table('brand_page')->where([
             'page_id' => $pageId,
@@ -275,7 +275,7 @@ class PagesController extends Controller
     public function copyPage(Request $request)
     {
         $requestData = $request->all();
-        
+
         foreach ($requestData['select_languages'] as $domainCode) {
             $domain = Localization::where('code', $domainCode)->first();
             $pageId = $requestData['page_id'];
@@ -283,26 +283,26 @@ class PagesController extends Controller
             $page = Page::findOrFail($pageId);
             $new = $page->replicate();
             $new->locale_id = $domain->id;
-            
-            //Сохранение копии
-            $new->push();    
 
-            $page->update($requestData);      
+            //Сохранение копии
+            $new->push();
+
+            $page->update($requestData);
         }
-        
+
         return true;
     }
 
     public function updateStatus(Request $request)
     {
         $requestData = $request->all();
-        
+
         if($requestData['type'] == 'page'){
             $data = Page::find($requestData['id']);
-            $data->status = $requestData['status'];  
+            $data->status = $requestData['status'];
             $data->update();
         }
-        
+
         return true;
     }
 
@@ -313,16 +313,16 @@ class PagesController extends Controller
 
         switch($request->page_type) {
             case(3):
- 
+
                 $data = Autor::where('locale_id', $domainId)->pluck('name', 'id');
- 
+
                 break;
             case(2):
- 
+
                 $data = Brand::where('locale_id', $domainId)->pluck('name', 'brands.id');
- 
+
                 break;
- 
+
             default:
                 $data = null;
         }

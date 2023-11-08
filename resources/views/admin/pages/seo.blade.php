@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <a href="{{ url('/pages') }}" title="Назад"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Назад</button></a>
+    <a href="{{ url('/admin/pages') }}" title="Назад"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Назад</button></a>
     <br />
     <br />
     @if ($errors->any())
@@ -18,10 +18,10 @@
         </ul>
     @endif
 
-    <form method="POST" action="{{ url('/pages/' . $page->id . '/update-seo') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+    <form method="POST" action="{{ url('/admin/pages/' . $page->id . '/update-seo') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
         {{ method_field('PATCH') }}
         {{ csrf_field() }}
-    
+
         <div class="form-group {{ $errors->has('meta_title') ? 'has-error' : ''}}">
             <label for="meta_title" class="control-label">{{ 'Meta title' }}</label>
             <input class="form-control" name="meta_title" type="text" id="meta_title" value="{{ isset($page->meta_title) ? $page->meta_title : old('meta_title')}}" >
