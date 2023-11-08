@@ -1,6 +1,6 @@
 <div class="form-group {{ $errors->has('site_name') ? 'has-error' : ''}}">
     <label for="site_name" class="control-label">{{ 'Наввание сайта' }}</label>
-    <input class="form-control" name="site_name" type="text" id="site_name" value="{{ isset($defaultsetting->locale_name) ? $defaultsetting->site_name : ''}}" >
+    <input class="form-control" name="site_name" type="text" id="site_name" value="{{ isset($defaultsetting->site_name) ? $defaultsetting->site_name : ''}}" >
     {!! $errors->first('site_name', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('address') ? 'has-error' : ''}}">
