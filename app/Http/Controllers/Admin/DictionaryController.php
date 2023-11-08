@@ -62,7 +62,7 @@ class DictionaryController extends Controller
             ]);
         }
 
-        return redirect('dictionary')->with('success', 'Текст добавлен в словарь!');
+        return redirect('admin/dictionary')->with('success', 'Текст добавлен в словарь!');
     }
 
     /**
@@ -74,7 +74,7 @@ class DictionaryController extends Controller
     public function edit($uid)
     {
         $dictionary = Dictionary::where('uid', $uid)->first();
-        
+
         if (!$dictionary) {
             abort(404);
         }
@@ -92,7 +92,7 @@ class DictionaryController extends Controller
     public function update(Request $request, $uid)
     {
         $requestData = $request->all();
-        
+
         $dictionary = Dictionary::where('uid', $uid)->get();
 
         if ($dictionary->count() == 0) {
@@ -109,7 +109,7 @@ class DictionaryController extends Controller
             }
         }
 
-        return redirect('dictionary')->with('success', 'Текст в словаре обновлен!');
+        return redirect('admin/dictionary')->with('success', 'Текст в словаре обновлен!');
     }
 
     /**
@@ -122,6 +122,6 @@ class DictionaryController extends Controller
     {
         Dictionary::destroy($id);
 
-        return redirect('dictionary')->with('success', 'Текст добавлен в словарь!');
+        return redirect('admin/dictionary')->with('success', 'Текст добавлен в словарь!');
     }
 }
