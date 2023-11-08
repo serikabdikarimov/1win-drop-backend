@@ -8,7 +8,6 @@ use App\Models\Brand;
 use App\Models\Localization;
 use App\Models\Page;
 use App\Models\Review;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +18,14 @@ class PagesController extends Controller
     public function homePage(Request $request)
     {
         $localeId = Localization::where('locale_name', $request->getHost())->first();
-        
+
         $page = Page::where(['slug' => '/', 'locale_id' => $localeId->id])->first();
 
         if (!$page) {
             abort(404);
         }
 
-        return view('frontend.pages.page', compact('page')); 
+        return view('frontend.pages.page', compact('page'));
     }
 
     public function page(Request $request, $slug)
@@ -43,13 +42,13 @@ class PagesController extends Controller
             $author = Autor::where(['id' => $page->type_content_id, 'locale_id' => $localeId->id])->first();
             return view('frontend.pages.author', compact('page','author'));
         }
-        
+
         if ($page->type == 2) {
             $brand = Brand::where(['id' => $page->type_content_id, 'locale_id' => $localeId->id])->first();
             return view('frontend.pages.brand', compact('page','brand'));
         }
 
-        return view('frontend.pages.page', compact('page', 'slug')); 
+        return view('frontend.pages.page', compact('page', 'slug'));
     }
 
 
@@ -78,21 +77,21 @@ class PagesController extends Controller
     public function contacts(Request $request)
     {
         $localeId = Localization::where('locale_name', request()->getHost())->first();
-        
+
         $page = Page::where(['slug' => 'contacts', 'locale_id' => $localeId->id])->first();
 
         if (!$page) {
             abort(404);
         }
-        
+
         return view('frontend.pages.contacts', compact('page'));
     }
 
     public function sendMessage(Request $request)
     {
-        
+
         $localeId = Localization::where('locale_name', request()->getHost())->first();
-        
+
         $requestData = $request->all();
         $requestData['domain_name'] = $request->getHost();
 
@@ -113,8 +112,8 @@ class PagesController extends Controller
 
     function userFavorites(Request $request)
     {
-        $requestData = $request->all(); 
-        
+        $requestData = $request->all();
+
         $localeId = Localization::where('locale_name', request()->getHost())->first();
         $requestData['locale_id'] = $localeId->id;
         $requestData['user_id'] = Auth::user()->id;

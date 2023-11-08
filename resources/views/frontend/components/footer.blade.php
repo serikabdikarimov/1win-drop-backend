@@ -8,7 +8,7 @@
                     </a>
                     <p class="footer__text">{{__('messages.footer_text')}}</p>
                 </div>
-                
+
                 <div class="footer__group">
                     @if ($domains->count() > 1)
                         <div class="footer__langSelector">
@@ -115,6 +115,6 @@
     </div>
     @endif
     <div class="footer__bottom">
-        <p class="footer__copyright">Copyright © 2005-{{ date('Y') }}, CasinoDeMexicali.com.mx, Todos los Derechos Reservados</p>
+        <p class="footer__copyright">Copyright©{{ date('Y') }}, {{__('messages.copyright_text')}}</p>
     </div>
 </div>
