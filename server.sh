@@ -19,6 +19,11 @@ else
     exit 1
 fi
 
+# Запрос наименования домена панели администратора
+echo "Введите url фдмин панели:"
+read new_admin_domain
+
+ADMIN_DOMAIN
 # Запрос значений для db_user, db_password и db_name
 echo "Введите название базы данных:"
 read new_db_name
@@ -33,6 +38,7 @@ read new_db_password
 echo "DB_DATABASE=$new_db_name" >> "$env_file"
 echo "DB_USERNAME=$new_db_user" >> "$env_file"
 echo "DB_PASSWORD=$new_db_password" >> "$env_file"
+echo "ADMIN_DOMAIN=$new_admin_domain" >> "$env_file"
 
 php artisan cache:clear
 php artisan config:clear
@@ -47,6 +53,7 @@ composer update
 
 # Миграция данных
 php artisan migrate
+php artisan storage:link
 echo "Миграция завершена"
 
 # Сидим данные

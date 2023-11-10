@@ -65,6 +65,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('admin.domains.*', function ($view) {
             $view->with([
                 'status' => \App\Models\Localization::STATUS_MAP,
+                'localizarionGroups' => \App\Models\Group::all()
             ]);
         });
 
