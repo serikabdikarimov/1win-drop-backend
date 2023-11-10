@@ -79,7 +79,9 @@
         </li>
         @endif
     </ul>
+    @if($menu)
     <button type="button" class="button button--iconOnly burger" aria-expanded="false" data-mobile-menu-toggle="">
         <span class="burger__line"></span>
     </button>
+    @endif
 </div>
