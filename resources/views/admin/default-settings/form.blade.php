@@ -89,10 +89,6 @@
             {!! $errors->first('banner', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
-</div>
-<br>
-<br>
-<div class="row">
     <div class="col-md-6">
         <div class="form-group {{ $errors->has('manifest_name') ? 'has-error' : ''}}">
             <label for="manifest_name" class="control-label">{{ 'Manifest name' }}</label>
