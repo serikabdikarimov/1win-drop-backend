@@ -1,5 +1,22 @@
 <div class="card">
     <div class="card-header alert-secondary">
+        Button Play
+    </div>
+    <div class="card-body">
+        <div class="form-group {{ $errors->has('play_val') ? 'has-error' : ''}}">
+            <label for="play_val" class="control-label">{{ 'Наименование кнопки' }}</label>
+            <input class="form-control" name="play_val" type="text" id="play_val" value="{{ isset($designsetting->play_val) ? $designsetting->play_val : ''}}" >
+            {!! $errors->first('play_val', '<p class="help-block">:message</p>') !!}
+        </div>
+        <div class="form-group {{ $errors->has('play_link') ? 'has-error' : ''}}">
+            <label for="play_link" class="control-label">{{ 'Ссылка' }}</label>
+            <input class="form-control" name="play_link" type="text" id="play_link" value="{{ isset($designsetting->play_link) ? $designsetting->play_link : ''}}" >
+            {!! $errors->first('play_link', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header alert-secondary">
         scss-docs-start root-body-variables
     </div>
     <div class="card-body">
@@ -64,6 +81,16 @@
         scss-docs-start components-variables
     </div>
     <div class="card-body">
+        <div class="form-group {{ $errors->has('logo_title') ? 'has-error' : ''}}">
+            <label for="logo_title" class="control-label">{{ 'Logo Title' }}</label>
+            <input class="form-control" name="logo_title" type="text" id="logo_title" value="{{ isset($designsetting->logo_title) ? $designsetting->logo_title : ''}}" >
+            {!! $errors->first('logo_title', '<p class="help-block">:message</p>') !!}
+        </div>
+        <div class="form-group {{ $errors->has('logo_title_background') ? 'has-error' : ''}}">
+            <label for="logo_title_background" class="control-label">{{ 'Logo Title Background' }}</label>
+            <input class="form-control" name="logo_title_background" type="text" id="logo_title_background" value="{{ isset($designsetting->logo_title_background) ? $designsetting->logo_title_background : ''}}" >
+            {!! $errors->first('logo_title_background', '<p class="help-block">:message</p>') !!}
+        </div>
         <div class="form-group {{ $errors->has('header_background') ? 'has-error' : ''}}">
             <label for="header_background" class="control-label">{{ 'Header Background' }}</label>
             <input class="form-control" name="header_background" type="text" id="header_background" value="{{ isset($designsetting->header_background) ? $designsetting->header_background : ''}}" >

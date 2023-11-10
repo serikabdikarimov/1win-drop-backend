@@ -33,8 +33,8 @@ function reIndexBlocks() {
                     $(child).attr('name', modifiedAttributeName);
                 })
             })
-            
-        } 
+
+        }
         let findChild = element.querySelectorAll('.form-control');
         $(findChild).each(function(key, child) {
             var attributeName = $(child).attr('name');
@@ -73,14 +73,14 @@ function changeSelect() {
                 }
             });
         }
-       
+
     });
 }
 function moveBlocks() {
     $('.go-up').click(function () {
-        $("textarea").each(function() { 
-            tinymce.execCommand('mceRemoveEditor', 
-            false, $(this).attr('id')); 
+        $("textarea").each(function() {
+            tinymce.execCommand('mceRemoveEditor',
+            false, $(this).attr('id'));
         });
         destroySelect2();
         console.log($(this).closest('.form-group').attr('data-block-name'));
@@ -88,9 +88,9 @@ function moveBlocks() {
         let thisEl = $(this).closest('.form-group');
         let prevIndex = parseInt(thisEl.attr('data-block-index')) - 1;
         let prevEl = $("div").find("[data-block-index='" + prevIndex + "']");
-        
+
         $(thisEl).after(prevEl);
-        
+
         selectJs();
         reIndexBlocks();
         //changeSelect();
@@ -99,9 +99,9 @@ function moveBlocks() {
     });
 
     $('.go-down').click(function () {
-        $("textarea").each(function() { 
-            tinymce.execCommand('mceRemoveEditor', 
-            false, $(this).attr('id')); 
+        $("textarea").each(function() {
+            tinymce.execCommand('mceRemoveEditor',
+            false, $(this).attr('id'));
         });
         destroySelect2();
         console.log($(this).closest('.form-group').attr('data-block-index'));
@@ -125,7 +125,7 @@ function selectJs() {
     });
 }
 
-//Для добавления новых блоков на страницу  
+//Для добавления новых блоков на страницу
 function addBlock($type) {
     $.ajax({
         type: "POST",
@@ -159,7 +159,7 @@ $('.showcase-brands').on('click', 'span[data-target="delete-item"]', function() 
     if ($(this).parent().parent().parent().children('div.row').length == 1 && $(this).data('trigger') == 'last') {
         return ;
     }
-    
+
     if (confirm("Вы уверены?")) {
         $(this).parent().parent().remove();
         //canSort();
@@ -174,7 +174,7 @@ $('.can-sort').on('click', 'span[data-target="delete-item"]', function() {
     if ($(this).parent().parent().parent().children('div.row').length == 1 && $(this).data('trigger') == 'last') {
         return ;
     }
-    
+
     if (confirm("Вы уверены?")) {
         $(this).parent().parent().remove();
         //canSort();
@@ -190,11 +190,12 @@ function copyToClipboard(element) {
     copyText.setSelectionRange(0, 99999);
     if (localStorage.getItem('buttonCustomImage')) {
         // Ключ существует
-        console.log('Ключ существует в localStorage');
+        var dataItem = localStorage.getItem('buttonCustomImage');
+
         localStorage.removeItem('buttonCustomImage');
-        $("#insertCustomImage").val(copyText.value);
-        $('#imageCustomContainer > img').remove();
-        $("#imageCustomContainer").prepend('<img class="img-fluid" src="'+ copyText.value +'" />');
+        $("."+dataItem).val(copyText.value);
+        $('#'+ dataItem +' > img').remove();
+        $("#"+dataItem).prepend('<img class="img-fluid" src="'+ copyText.value +'" />');
 
     } else {
         if ($('input[type=url]').length == 0) {
@@ -205,27 +206,27 @@ function copyToClipboard(element) {
         else {
             console.log($('input[type=url]'));
             $('input[type=url]').val(copyText.value);
-    
+
             var currentDomain = window.location.hostname;
             var imageUrl = 'http://' + currentDomain + copyText.value; // Используйте текущий домен в URL изображения
-    
+
             var tempImage = new Image();
             $(tempImage).on('load', function() {
                 var width = tempImage.width;
                 var height = tempImage.height;
-    
+
                 var labelWidth = $('label:contains("Ширина")');
                 var labelTitle = $('label:contains("Высота")');
-    
+
                 labelWidth.closest('.tox-form__group').children('input').val(width);
                 labelTitle.closest('.tox-form__group').children('input').val(height);
-    
+
                 console.log('Ширина изображения:', width);
                 console.log('Высота изображения:', height);
             });
-    
+
             tempImage.src = imageUrl;
-    
+
             $.ajax({
                 type: "POST",
                 url: '/image-attributes',
@@ -239,19 +240,19 @@ function copyToClipboard(element) {
                 {
                     var alt = $('label:contains("Альтернативное описание")');
                     var title = $('label:contains("Название изображения")');
-                    
+
                     console.log(title.closest('.tox-form__group'));
-    
+
                     title.closest('.tox-form__group').children('input').val(options.attr_title);
                     alt.closest('.tox-form__group').children('input').val(options.alt);
-    
+
                     console.log('Alt:', options.alt);
                     console.log('Title:', options.title);
                 }
             });
-        }  
+        }
     }
-    
+
     $('#file-manager-modal').modal('toggle');
     //копирование ссылки на изображение
     try {
@@ -298,7 +299,7 @@ $(document).ready(function() {
     tinymce.remove("textarea.destroy-editor");
 
     $('#site_type').change(function () {
-        
+
         if ($(this).val() == 'multi_language') {
             $('#site_settings #name').attr('placeholder', 'Наименование языка').focus().blur();
             $('#site_settings #locale_name').val('');
@@ -307,7 +308,7 @@ $(document).ready(function() {
             $('#site_settings #name').attr('placeholder', 'Наименование сайта').focus().blur();
             $('#site_settings #locale_name').val($(location).attr('hostname'));
             $('#site_settings #locale_name').attr('placeholder', 'Доменное имя').focus().blur();
-            
+
         }
 
         console.log($('#site_settings #name').attr('placeholder'))
@@ -325,6 +326,14 @@ $(document).ready(function() {
         var test = localStorage.getItem('buttonCustomImage');
         console.log(test);
 
+    })
+
+    $('.upload-icon').click(function () {
+        localStorage.setItem('buttonCustomImage', $(this).data('icon'));
+
+        // Получение данных из localStorage
+        var test = localStorage.getItem('buttonCustomImage');
+        console.log(test);
     })
 
     $('.close-modal').click(function () {
@@ -405,14 +414,14 @@ $(document).ready(function() {
                     $.each(data, function( index, value ) {
                         $('#gallery-page').prepend('<div class="col-2 gallery-img"><div class="img-wrapper" style="display: flex; align-items:center; height:100%"><img src="/storage/uploads/'+ value +'" alt="" style="max-width: 300px; width: 100%;"></div><div class="descrpition"><div><p>'+ value +'</p><div style="display: flex; justify-content: center;"><a href="/gallery/' + index + '/edit" title="Редактировать изображение"><button class="btn btn-primary btn-sm"><i class="far fa-edit"></i></button></a><p>&nbsp;&nbsp;</p><form method="POST" action="/gallery/'+ value +'" accept-charset="UTF-8" style="display:inline"><input type="hidden" name="_method" value="DELETE"><input type="hidden" name="_token" value="'+ csrfToken +'"><button type="submit" class="btn btn-danger btn-sm" title="Удалить изображение" onclick="return confirm(`вы уверены?`)"><i class="fa fa-trash" aria-hidden="true"></i></button></form></div></div></div></div>')
                     });
-                } 
+                }
                 if ($("ul#gallery".length)) {
                     $('#gallery > li').remove();
                     $.each(data, function( index, value ) {
                         $("#gallery").prepend('<li class="image-container"><input id="data-'+ index +'" type="text" value="/storage/uploads/'+ value +'" hidden><img class="lazy" data-src="/storage/uploads/'+ value +'" alt="'+ value +'" /><div id="img-'+ index +'" class="projectInfo"><button class="btn btn-primary" onclick="copyToClipboard(`data-'+ index +'`)">Выбрать</button></div></li>');
                     });
                 }
-                
+
                 $('.lazy').lazy();
             },
             error: function(data)
@@ -465,16 +474,16 @@ $(document).ready(function() {
     function reIndexBlocks() {
         $('.can-sort .form-group').each(function(index, element) {
             $(element).attr("data-block-index", index);
-    
+
             //console.log($(element).attr("data-block-name"), findChild.length);
             if ($(element).attr("data-block-name") == "dynamic_attributes") {
-    
+
                 let findChildRow = element.querySelectorAll('.row');
-    
+
                 $(findChildRow).each(function(elKey, childRow) {
-    
+
                     let findChild = childRow.querySelectorAll('.form-control');
-    
+
                     $(findChild).each(function(key, child) {
                         if ($(child).attr("data-item-name") == 'attribute_item') {
                             var modifiedAttributeName = 'add_content['+ index +'][dynamic_attributes][items]['+ elKey +']['+ $(child).attr("data-item-name") +'][]';
@@ -485,12 +494,12 @@ $(document).ready(function() {
                             var attributeName = $(child).attr('name');
                             var modifiedAttributeName = attributeName.replace(/\[\d+\]/, '[' + index + ']');
                         }
-    
+
                         $(child).attr('name', modifiedAttributeName);
                     })
                 })
-                
-            } 
+
+            }
             let findChild = element.querySelectorAll('.form-control');
             $(findChild).each(function(key, child) {
                 var attributeName = $(child).attr('name');
@@ -563,7 +572,7 @@ $(document).ready(function() {
     }
 
     selectJs();
-    //canSort(); //Фукнция перемещения элементов (меняем понядок) 
+    //canSort(); //Фукнция перемещения элементов (меняем понядок)
 
 
     // Set up the Select2 control
@@ -579,13 +588,13 @@ $(document).ready(function() {
     }).on('select2:selecting', function (e) {
         if (e.params.args.data.newOption) {
             e.preventDefault(); // Отменить добавление нового элемента в список select2
-            
+
             var newValue = e.params.args.data.text;
             console.log(newValue);
             saveNewValueToDatabase(newValue);
             $(this).val('').trigger('change').select2('close');
         }
-        
+
     });
 
     function saveNewValueToDatabase(value) {
@@ -600,10 +609,10 @@ $(document).ready(function() {
             },
             success: function (response) {
                     var id = response.id;
-                
+
                 // Создайте новый объект с использованием id и значения
                 var newOption = new Option(value, id, true, true);
-                
+
                 // Добавьте новый элемент в select2 и выберите его
                 $('select').append(newOption).trigger('change');
             },
@@ -619,8 +628,8 @@ $(document).ready(function() {
     });
 
     $('#select-lang-block li').on('click', function () {
-        console.log($(this).data('value'));  
-        //window.location.href = "/" + $( "#go_lang option:selected" ).val(); 
+        console.log($(this).data('value'));
+        //window.location.href = "/" + $( "#go_lang option:selected" ).val();
         $.ajax({
             type: "POST",
             url: '/admin/set-locale',
@@ -654,7 +663,7 @@ $(document).ready(function() {
             success: function(data)
             {
                 canSortBlock.append(data);
-    
+
                 if (type != 'dinamyc-block' && type != 'static-block') {
                     makeTinyMceEditor();
                 }

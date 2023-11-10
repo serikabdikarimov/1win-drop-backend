@@ -18,11 +18,13 @@
     <meta name="revisit-after" content="7 days">
 
     <!-- Favicons -->
-    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="{{ '/storage/uploads/' . $settings->getFavicon32->url }}" sizes="any">
     <!-- 32×32 -->
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="{{ '/storage/uploads/' . $settings->getFavicon64->url }}" type="image/svg+xml">
+    <!-- 64x64 -->
+    <link rel="apple-touch-icon" href="{{ '/storage/uploads/' . $settings->getFavicon180->url }}">
     <!-- 180×180 -->
+
     <link rel="manifest" href="/manifest.webmanifest">
 
     <meta name="title" content="{{ isset($page) && $page->meta_title != null ? $page->meta_title : $settings->meta_title }}">
@@ -59,6 +61,12 @@
     <link href="/static/css/main.min.css?v={{mt_rand(1, 100)}}" rel="stylesheet">
     <style>
         :root {
+            @if ($design_settings->logo_title)
+                --logo-title: {{ $design_settings->logo_title }};
+            @endif
+            @if ($design_settings->logo_title_background)
+                --logo-title-background: {{ $design_settings->logo_title_background }};
+            @endif
             @if ($design_settings->body_font_size)
                 --body-font-size: {{ $design_settings->body_font_size }};
             @endif
@@ -260,12 +268,12 @@
     <!-- Xml -->
     <link href='/sitemap.xml' rel='alternate' title='Sitemap' type='application/rss+xml'/>
     <!-- Canonical -->
-    <link rel="canonical" href="{{ 'https://' . $domain->domain_name }}{{ $domain->path($domain->id, request()->path()) != null && $domain->path($domain->id, request()->path())->slug != '/' ? '/' . request()->path() : '' }}"/>
+    <link rel="canonical" href="{{ 'https://' . $domain->locale_name }}{{ $domain->path($domain->id, request()->path()) != null && $domain->path($domain->id, request()->path())->slug != '/' ? '/' . request()->path() : '' }}"/>
     @foreach ($domains as $domain)
         @if (request()->route() && request()->route()->getName() == 'search')
-            <link rel="alternate" href="{{ 'https://' . $domain->domain_name . '/search' }}" hreflang="{{ $domain->code }}" />
+            <link rel="alternate" href="{{ 'https://' . $domain->locale_name . '/search' }}" hreflang="{{ $domain->code }}" />
         @else
-            <link rel="alternate" href="{{ 'https://' . $domain->domain_name }}{{ $domain->path($domain->id, request()->path()) != null && $domain->path($domain->id, request()->path())->slug != '/' ? '/' . request()->path() : '' }}" hreflang="{{ $domain->code }}" />
+            <link rel="alternate" href="{{ 'https://' . $domain->locale_name }}{{ $domain->path($domain->id, request()->path()) != null && $domain->path($domain->id, request()->path())->slug != '/' ? '/' . request()->path() : '' }}" hreflang="{{ $domain->code }}" />
         @endif
     @endforeach
 </head>
@@ -290,12 +298,12 @@
                 @yield('content')
             </main>
             <!--/. App Main End -->
-            @if(!isset($exception)) {{-- Убираем footer --}}
+
             <!-- Footer Begin -->
             <footer class="footer">
                 @include('frontend.components.footer', ['menu' => $domain->getMenuCategory('footer')])
             </footer>
-           @endif
+
             <div class="app__backdrop"></div>
         </div>
         <!--/. App Wrapper End -->

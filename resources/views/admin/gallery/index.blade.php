@@ -8,10 +8,10 @@
 
 @section('content')
     @include('flash-message')
-    <a href="{{ url('/gallery/create') }}" class="btn btn-success btn-sm" title="Добавить изображение">
+    <a href="{{ url('/admin/gallery/create') }}" class="btn btn-success btn-sm" title="Добавить изображение">
         <i class="fa fa-plus" aria-hidden="true"></i> Добавить
     </a>
-    <form method="GET" action="{{ url('/gallery') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+    <form method="GET" action="{{ url('/admin/gallery') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
         {{--<div class="form-group">
             <select name="category_id" id="category_id" class="form-control" style="width: 150px;">
                 <option value="">Категория</option>
@@ -38,7 +38,7 @@
             color: #fff;
             border: 1px solid #dedede;
             padding: 10px;
-        } 
+        }
         .gallery-img  .descrpition {
             opacity: 0;
             position: absolute;
@@ -57,11 +57,11 @@
         }
         .select2-container {
             width: 150px!important;
-            
+
         }
         .select2-container .select2-selection--single {
             height: 37px;
-            
+
         }
         .select2-selection__rendered {
             line-height: 29px!important;
@@ -105,9 +105,9 @@
                             <div>
                                 <p>{{ $item->url }}</p>
                                 <div style="display: flex; justify-content: center;">
-                                    <a href="{{ url('/gallery/' . $item->id . '/edit') }}" title="Редактировать изображение"><button class="btn btn-primary btn-sm"><i class="far fa-edit"></i></button></a>
+                                    <a href="{{ url('/admin/gallery/' . $item->id . '/edit') }}" title="Редактировать изображение"><button class="btn btn-primary btn-sm"><i class="far fa-edit"></i></button></a>
                                     <p>&nbsp;&nbsp;</p>
-                                    <form method="POST" action="{{ url('/gallery' . '/' . $item->url) }}" accept-charset="UTF-8" style="display:inline">
+                                    <form method="POST" action="{{ url('/admin/gallery' . '/' . $item->url) }}" accept-charset="UTF-8" style="display:inline">
                                         {{ method_field('DELETE') }}
                                         {{ csrf_field() }}
                                         <button type="submit" class="btn btn-danger btn-sm" title="Удалить изображение" onclick="return confirm('вы уверены?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -115,21 +115,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>        
+                    </div>
                 @endforeach
             </div>
           </div>
-        
+
     </div>
     <div class="pagination-wrapper"> {!! $gallery->appends(['search' => Request::get('search')])->render() !!} </div>
 
 @stop
 @section('css')
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">
-    <link rel="stylesheet" href="/css/gallery/main.css">
-@stop
-
-@section('js')
-    <script type="text/javascript" src="/js/gallery/jquery.lazy.min.js"></script>
-    <script type="text/javascript" src="/js/gallery/gallery.js?v=0.{{mt_rand(1, 100)}}"></script>
 @stop

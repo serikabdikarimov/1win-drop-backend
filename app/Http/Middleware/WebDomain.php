@@ -19,11 +19,10 @@ class WebDomain
     {
         //$domains = Domain::pluck('domain_name')->toArray();
         $domain = Localization::where('locale_name' , $request->getHost())->where('is_active', "1")->first();
-        // if ($request->getHost() == env('ADMIN_DOMAIN') && !$domain) {
-        //     return redirect('/login');
+        if ($request->getHost() == env('ADMIN_DOMAIN') && !$domain) {
+            return redirect('/admin/login');
         
-        // } else
-        if(!$domain)
+        } elseif(!$domain)
         {
             return response('', 400);
         } 

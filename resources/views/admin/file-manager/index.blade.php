@@ -103,6 +103,9 @@
             </x-adminlte-select2>
             <x-adminlte-input label="{{ 'Title' }}" name="attr_title" type="text" id="attr_title" value="" required enable-old-support></x-adminlte-input>
             <x-adminlte-input label="{{ 'Alt' }}" name="alt" type="text" id="alt" value="" required enable-old-support></x-adminlte-input>
+            <x-adminlte-input label="{{ 'Width' }}" name="width" type="text" id="width" value="" enable-old-support></x-adminlte-input>
+            <x-adminlte-input label="{{ 'Height' }}" name="height" type="text" id="height" value="" enable-old-support></x-adminlte-input>
+
             <input type="file" class="form-control" name="upload" value="" required>
           </div>
       </div>

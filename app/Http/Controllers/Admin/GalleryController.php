@@ -71,10 +71,10 @@ class GalleryController extends Controller
 
         ImageOptimizer::optimize(public_path('storage/uploads/' . $imageName));
 
-        $domains = Domain::all();
-        
+        $domains = Localization::all();
+
         foreach ($domains as $domain) {
-            
+
             $alt = $requestData['alt'][$domain->code];
             $attrTitle = $requestData['attr_title'][$domain->code];
 
@@ -83,6 +83,8 @@ class GalleryController extends Controller
                 'url' => $imageName,
                 'alt' => $alt,
                 'attr_title' => $attrTitle,
+                'width' => $requestData['width'],
+                'height' => $requestData['height'],
                 'locale_id' => $domain->id
             ]);
 
@@ -91,7 +93,7 @@ class GalleryController extends Controller
             }
         }
 
-        return redirect('gallery')->with('flash_message', 'Gallery added!');
+        return redirect('admin/gallery')->with('flash_message', 'Gallery added!');
     }
 
     /**
@@ -119,7 +121,7 @@ class GalleryController extends Controller
     {
         $gallery = Gallery::findOrFail($id);
         $galleryCategories = GalleryCategory::all();
-        
+
         return view('admin.gallery.edit', compact('gallery', 'galleryCategories'));
     }
 
@@ -133,22 +135,22 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $requestData = $request->all();
 
         $gallery = Gallery::findOrFail($id);
 
         if ($request->hasFile('file')) {
-            
+
             //Storage::disk('public')->delete('uploads/3x/' . $gallery->url);
             //Storage::disk('public')->delete('uploads/2x/' . $gallery->url);
             Storage::disk('public')->delete('uploads/' . $gallery->url);
 
             $imageName = Str::slug($requestData['title']) . '.' . $request->file('file')->getClientOriginalExtension();
 
-            //Получаем информацию о ширине изображения 
+            //Получаем информацию о ширине изображения
             $size = getimagesize($requestData['file']);
-            
+
             //Большой размер 3х оригинальная ширины
             $img3x = Image::make($request->file('file'))->resize($size[0], null, function ($constraint) {
             $constraint->aspectRatio();
@@ -161,19 +163,19 @@ class GalleryController extends Controller
             // $constraint->aspectRatio();
             // });
             // Storage::disk('public')->put('uploads/2x/' . $imageName, (string) $img2x->encode());
-            
+
             //стандартный размер для отображения на фронте, размер х четверть ширины
             // $img = Image::make((string) $img2x->encode())->resize($size[0]/4, null, function ($constraint) {
             //     $constraint->aspectRatio();
             // });
-            
+
             // Storage::disk('public')->put('uploads/' . $imageName, (string) $img->encode());
-            
+
             //Оптимизируем размер изображений
             // ImageOptimizer::optimize(public_path('storage/uploads/3x/' . $imageName));
             // ImageOptimizer::optimize(public_path('storage/uploads/2x/' . $imageName));
             ImageOptimizer::optimize(public_path('storage/uploads/' . $imageName));
-            
+
         } else {
             $fileArray = explode('.', $gallery->url);
             $imageName = Str::slug($requestData['title']) . '.' . end($fileArray);
@@ -183,19 +185,21 @@ class GalleryController extends Controller
             // Storage::disk('public')->move('uploads/3x/' . $gallery->url, 'uploads/3x/' . $imageName);
         }
 
-        $domains = Domain::all();
-        
+        $domains = Localization::all();
+
         foreach ($domains as $domain) {
-            $galleryUpdate = Gallery::where(['url' => $gallery->url, 'locale_id' => $domain->id])->first();  
+            $galleryUpdate = Gallery::where(['url' => $gallery->url, 'locale_id' => $domain->id])->first();
 
             $alt = $requestData['alt'][$domain->code];
             $attrTitle = $requestData['attr_title'][$domain->code];
-            
+
             $galleryUpdate->update([
                 'title' => $requestData['title'],
                 'url' => $imageName,
                 'alt' => $alt,
                 'attr_title' => $attrTitle,
+                'width' => $requestData['width'],
+                'height' => $requestData['height'],
                 'locale_id' => $domain->id
             ]);
 
@@ -204,7 +208,7 @@ class GalleryController extends Controller
             }
         }
 
-        return redirect('gallery')->with('flash_message', 'Gallery updated!');
+        return redirect('admin/gallery')->with('flash_message', 'Gallery updated!');
     }
 
     /**
@@ -217,17 +221,17 @@ class GalleryController extends Controller
     public function destroy($url)
     {
         $images = Gallery::where('url', $url)->get();
-        
+
         if (!$images) {
             abort(404);
         }
-        
+
         Storage::disk('public')->delete('uploads/' . $images[0]->url);
-        
+
         foreach ($images as $key => $value) {
             $value->delete();
         }
 
-        return redirect('gallery')->with('flash_message', 'Gallery deleted!');
+        return redirect('admin/gallery')->with('flash_message', 'Gallery deleted!');
     }
 }

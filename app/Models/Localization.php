@@ -28,6 +28,7 @@ class Localization extends Model
         'name',
         'region_name',
         'locale_name',
+        'group_id',
         'code',
         'icon',
         'is_active'

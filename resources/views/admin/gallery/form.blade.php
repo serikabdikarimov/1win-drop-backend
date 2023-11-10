@@ -13,7 +13,7 @@
 <br>
 <div class="tab-content" id="myTabContent">
     @foreach($localizationList as $item)
-        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $item->code }}" role="tabpanel" aria-labelledby="{{ $item->code }}-tab">  
+        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $item->code }}" role="tabpanel" aria-labelledby="{{ $item->code }}-tab">
             <div class="form-group {{ $errors->has('attr_title.' . $item->site_name) ? 'has-error' : ''}}">
                 <label for="attr_title_{{ $item->id }}" class="control-label">{{ 'Title (' . $item->code . ')' }}</label>
                 <input class="form-control" name="attr_title[{{ $item->code }}]" type="text" id="attr_title_{{ $item->id }}" value="{{ isset($gallery) && $gallery->getTitle($gallery->url, $item->id) != null ? $gallery->getTitle($gallery->url, $item->id) : old('alt.' . $item->code)}}" >
@@ -28,6 +28,14 @@
     @endforeach
 </div>
 <div class="form-group">
+    <label for="width" class="form-label">Width</label>
+    <input type="text" class="form-control" name="width" placeholder="Ширина картинки" value="{{ isset($gallery) ? $gallery->width : old('with')}}" >
+</div>
+<div class="form-group">
+    <label id="width" for="height" class="form-label">Height</label>
+    <input id="height" type="text" class="form-control" name="height" placeholder="Ширина картинки" value="{{ isset($gallery) ? $gallery->height : old('height')}}" >
+</div>
+<div class="form-group">
     <label for="gallery_categories" class="label-control">Категория</label>
     <select name="gallery_categories[]" id="gallery_categories" class="form-control js-example-basic-multiple" multiple>
         @foreach($galleryCategories as $item)
@@ -36,7 +44,7 @@
     </select>
 </div>
 @if (isset($gallery->url))
-<br>    
+<br>
 <div class="form-group">
     <img src="/storage/uploads/{{ $gallery->url }}" alt="" class="img-fluid">
     <p class="form-control">/storage/uploads/{{ $gallery->url }}</p>

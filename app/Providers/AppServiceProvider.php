@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         //Получаем настройки сайта (тип)
         view()->composer('*', function ($view) {
             $localizationFromDb = \App\Models\Localization::orderBy('id', 'ASC')->first();
-            
+
             if ($localizationFromDb) {
                 $localizationLink = session('admin_locale') != null ? session('admin_locale') : $localizationFromDb->code;
                 $currentLocalization = \App\Models\Localization::where('code', $localizationLink)->first();
@@ -44,13 +44,14 @@ class AppServiceProvider extends ServiceProvider
                 $localizationLink = NULL;
                 $currentLocalization = null;
             }
-            
+
             $view->with([
                 'siteSettings' => \App\Models\SiteSetting::first(),
                 'localizationList' => \App\Models\Localization::orderBy('id', 'ASC')->get(),
                 'currentLocalization' => $currentLocalization,
                 'pageTypes' => \App\Models\Page::PAGE_TYPES,
                 'pageStatuses' => \App\Models\Page::PAGE_STATUSES,
+                'categoriesNull' => \App\Models\GalleryCategory::whereNull('parent_id')->orderBy('name', 'ASC')->get(),
             ]);
         });
 
@@ -65,6 +66,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('admin.domains.*', function ($view) {
             $view->with([
                 'status' => \App\Models\Localization::STATUS_MAP,
+                'localizarionGroups' => \App\Models\Group::all()
             ]);
         });
 
@@ -93,9 +95,9 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('frontend.*', function ($view) {
             $domainName = request()->getHost(); //Получаем текущего текущий домен
             $domain = \App\Models\Localization::where('locale_name', $domainName)->first(); //Получаем id код текущего языка
-            
+
             if (!$domain) {
-                $domain = \App\Models\Localization::first(); 
+                $domain = \App\Models\Localization::first();
             }
 
             $view->with([

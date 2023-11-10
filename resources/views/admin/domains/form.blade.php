@@ -15,6 +15,16 @@
     <input class="form-control" name="locale_name" type="text" id="locale_name" value="{{ isset($domain->locale_name) ? $domain->locale_name : old('locale_name')}}" required>
     {!! $errors->first('locale_name', '<p class="help-block">:message</p>') !!}
 </div>
+
+<div class="form-gro">
+    <select name="group_id" id="group_id" class="form-control">
+        <option value="">Без сетки</option>
+        @foreach ($localizarionGroups as $group)
+            <option value="{{ $group->id }}" {{ isset($domain->group_id) && $domain->group_id == $group->id ? 'selected' : '' }}>{{ $group->title }}</option>
+        @endforeach
+    </select>
+</div>
+
 <div class="form-group {{ $errors->has('code') ? 'has-error' : ''}}">
     <label for="code" class="control-label">{{ 'Машинное имя' }}</label>
     <input class="form-control" name="code" type="text" id="code" value="{{ isset($domain->code) ? $domain->code : old('code')}}" >

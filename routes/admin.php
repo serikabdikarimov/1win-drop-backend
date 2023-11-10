@@ -103,5 +103,5 @@ Route::middleware(['admin', 'checkSiteSettings'])->prefix('admin')->name('admin.
 
     Route::resource('partners', App\Http\Controllers\Admin\PartnersController::class)->except(['show']);
     Route::resource('users', App\Http\Controllers\Admin\UsersController::class)->except(['show']);
-    
+    Route::resource('groups', App\Http\Controllers\Admin\GroupsController::class)->except(['show']);
 });
