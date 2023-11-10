@@ -49,6 +49,76 @@ class DefaultSettingsController extends Controller
             $requestData['logo'] = $imageId->id;
         }
 
+        if ($requestData['favicon_32'] != null) {
+            $check = strripos($requestData['favicon_32'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['favicon_32']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['favicon_32'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['favicon_32'] = $imageId->id;
+        }
+
+        if ($requestData['favicon_64'] != null) {
+            $check = strripos($requestData['favicon_64'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['favicon_64']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['favicon_64'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['favicon_64'] = $imageId->id;
+        }
+
+        if ($requestData['favicon_180'] != null) {
+            $check = strripos($requestData['favicon_180'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['favicon_180']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['favicon_180'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['favicon_180'] = $imageId->id;
+        }
+
+        if ($requestData['manifest_192'] != null) {
+            $check = strripos($requestData['manifest_192'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['manifest_192']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['manifest_192'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['manifest_192'] = $imageId->id;
+        }
+
+        if ($requestData['manifest_512'] != null) {
+            $check = strripos($requestData['manifest_512'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['manifest_512']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['manifest_512'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['manifest_512'] = $imageId->id;
+        }
+
         if (isset($defaultsetting)) {
             DefaultSetting::updateOrCreate([
                 'id'=> $defaultsetting->id
@@ -83,6 +153,76 @@ class DefaultSettingsController extends Controller
 
             $imageId = Gallery::where('url', $url)->first();
             $requestData['logo'] = $imageId->id;
+        }
+
+        if ($requestData['favicon_32'] != null) {
+            $check = strripos($requestData['favicon_32'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['favicon_32']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['favicon_32'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['favicon_32'] = $imageId->id;
+        }
+
+        if ($requestData['favicon_64'] != null) {
+            $check = strripos($requestData['favicon_64'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['favicon_64']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['favicon_64'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['favicon_64'] = $imageId->id;
+        }
+
+        if ($requestData['favicon_180'] != null) {
+            $check = strripos($requestData['favicon_180'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['favicon_180']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['favicon_180'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['favicon_180'] = $imageId->id;
+        }
+
+        if ($requestData['manifest_192'] != null) {
+            $check = strripos($requestData['manifest_192'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['manifest_192']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['manifest_192'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['manifest_192'] = $imageId->id;
+        }
+
+        if ($requestData['manifest_512'] != null) {
+            $check = strripos($requestData['manifest_512'], "/");
+
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['manifest_512']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['manifest_512'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['manifest_512'] = $imageId->id;
         }
 
         DefaultSetting::updateOrCreate([

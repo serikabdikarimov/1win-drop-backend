@@ -25,7 +25,7 @@ class Gallery extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'url', 'alt', 'locale_id', 'attr_title'];
+    protected $fillable = ['title', 'url', 'alt', 'locale_id', 'attr_title', 'width', 'height'];
 
     public function categories()
     {
@@ -35,16 +35,16 @@ class Gallery extends Model
     public function getAlt($url, $locale_id)
     {
         $data = Gallery::where(['url' => $url, 'locale_id' => $locale_id])->first();
-        
+
         return $data->alt;
     }
 
     public function getTitle($url, $locale_id)
     {
         $data = Gallery::where(['url' => $url, 'locale_id' => $locale_id])->first();
-        
+
         return $data->attr_title;
     }
 
-    
+
 }

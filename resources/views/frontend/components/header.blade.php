@@ -1,6 +1,6 @@
 <div class="header__container">
-    <a href="/" class="logo" aria-label="{{ __('messages.Основное меню') }}" title="{{ $settings->getLogo->attr_title }}">
-        <img src="/storage/uploads/{{ $settings->getLogo->url }}" width="142" height="52" class="logo__img" alt="{{ $settings->getLogo->alt }}">
+    <a href="/" class="logo" title="{{ $settings->getLogo->attr_title }}">
+        <img src="/storage/uploads/{{ $settings->getLogo->url }}" width="{{ $settings->getLogo->width ? $settings->getLogo->width : '142' }}" height="{{ $settings->getLogo->height ? $settings->getLogo->height : '52' }}" class="logo__img" alt="{{ $settings->getLogo->alt }}">
         <span class="logo__title">{{ $domain->region_name }}</span>
     </a>
     @if($menu)
@@ -59,23 +59,27 @@
         </button>
     </nav>
     @endif
-    {{-- <ul class="header__right">
+    <ul class="header__right">
+        @if ($domain->group_id)
         <li class="header__rightItem">
             <button type="button" class="lang-selector" data-micromodal-trigger="modal-lang">
                 <span class="visuallyHidden">{{ __('messages.Выбор языка страницы') }}</span>
-                <img class="lang-selector__icon" src="/storage/uploads/{{ $currentLocalization->getIcon->url }}" width="24" height="24" title="{{ $currentLocalization->getIcon->title }}" alt="{{ $currentLocalization->getIcon->alt }}">
-                <span class="lang-selector__text">KZ</span>
+                <img class="lang-selector__icon" src="/storage/uploads/{{ $domain->getIcon->url }}" width="24" height="24" title="{{ $domain->getIcon->title }}" alt="{{ $domain->getIcon->alt }}">
+                <span class="lang-selector__text">{{ $domain->locale_name }}</span>
             </button>
         </li>
+        @endif
+        @if($design_settings->play_link)
         <li class="header__rightItem">
-            <a href="#" class="button button--primary" rel="nofollow noindex">
+            <a href="{{ $design_settings->play_link }}" class="button button--primary" rel="nofollow noindex">
                 <span class="button__content">
-               <span class="button__text">{{__('messages.Играть')}}<br></span>
+               <span class="button__text">{{ $design_settings->play_val }}<br></span>
                 </span>
             </a>
         </li>
+        @endif
     </ul>
     <button type="button" class="button button--iconOnly burger" aria-expanded="false" data-mobile-menu-toggle="">
         <span class="burger__line"></span>
-    </button> --}}
+    </button>
 </div>

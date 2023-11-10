@@ -49,13 +49,16 @@ class DefaultSetting extends Model
         'apple_auth_key',
         'apple_client_secret_updated_at',
         'apple_refresh_token_interval_days',
-        'manifest_icon_512',
-        'manifest_icon_192',
+        'manifest_512',
+        'manifest_192',
         'manifest_theme_color',
         'manifest_background_color',
-        'manifest_shor_decription',
+        'manifest_short_description',
         'manifest_description',
-        'manifest_name'
+        'manifest_name',
+        'favicon_32',
+        'favicon_64',
+        'favicon_180'
     ];
 
     public function getLogo()
@@ -63,8 +66,25 @@ class DefaultSetting extends Model
         return $this->hasOne(Gallery::class, 'id', 'logo');
     }
 
+    public function getFavicon32(){
+        return $this->hasOne(Gallery::class, 'id', 'favicon_32');
+    }
+
+    public function getFavicon64(){
+        return $this->hasOne(Gallery::class, 'id', 'favicon_64');
+    }
+
+    public function getFavicon180(){
+        return $this->hasOne(Gallery::class, 'id', 'favicon_180');
+    }
+
+    public function getManifestIcon192()
+    {
+        return $this->hasOne(Gallery::class, 'id', 'manifest_192');
+    }
+
     public function getManifestIcon512()
     {
-        return $this->hasOne(Gallery::class, 'id', 'logo');
+        return $this->hasOne(Gallery::class, 'id', 'manifest_512');
     }
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
-    public function create($name, $image, $alt, $title, $categories)
+    public function create($name, $image, $alt, $title, $categories, $width, $heigth)
     {
         $imageName = Str::slug($name) . '.' . $image->getClientOriginalExtension();
 
@@ -20,7 +20,7 @@ class ImageService
         } else {
             Storage::disk('public')->put('uploads/' . $imageName, file_get_contents($image));
         }
-        
+
         $domains = Localization::all();
 
         foreach ($domains as $key => $value) {
@@ -29,6 +29,8 @@ class ImageService
                 'url' => $imageName,
                 'alt' => $alt,
                 'attr_title' => $title,
+                'width' => $width,
+                'height' => $heigth,
                 'locale_id' => $value->id
             ]);
 
