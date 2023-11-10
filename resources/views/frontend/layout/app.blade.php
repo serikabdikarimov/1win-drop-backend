@@ -319,7 +319,7 @@
     <!-- Main scripts. You can replace it, but I recommend you to leave it here -->
     <script type="module" src="/static/js/main.min.js?v={{mt_rand(1, 100)}}"></script>
     <script src="/static/js/separate-js/scripts.js?v=0.{{mt_rand(1, 100)}}"></script>
-    @if($menu)
+    @if($domain->getMenuCategory('header') != null)
     <dialog class="mobile-menu">
         <div class="mobile-menu__wrapper">
             <div class="mobile-menu__menuContainer scrollable scrollable--vertical" data-scrollable="true">
@@ -382,28 +382,6 @@
             </div>
         </div>
     </dialog>
-
-     <!-- Mobile Menu Begin -->
-     {{-- <dialog class="mobile-menu">
-        <div class="mobile-menu__wrapper">
-            <div class="mobile-menu__menuContainer scrollable scrollable--vertical" data-scrollable="true">
-                <ul class="mobile-menu__menu">
-                    <li class="mobile-menu__item">
-                        <a href="#" class="mobile-menu__link">Казино</a>
-                    </li>
-                    <li class="mobile-menu__item">
-                        <a href="#" class="mobile-menu__link">Казино</a>
-                    </li>
-                    <li class="mobile-menu__item">
-                        <a href="#" class="mobile-menu__link">Казино</a>
-                    </li>
-                    <li class="mobile-menu__item">
-                        <a href="#" class="mobile-menu__link">Казино</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </dialog> --}}
     <!--/. Mobile Menu End -->
     @endif
     @if ($domains->count() > 1)
