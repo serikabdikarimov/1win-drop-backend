@@ -319,7 +319,7 @@
     <!-- Main scripts. You can replace it, but I recommend you to leave it here -->
     <script type="module" src="/static/js/main.min.js?v={{mt_rand(1, 100)}}"></script>
     <script src="/static/js/separate-js/scripts.js?v=0.{{mt_rand(1, 100)}}"></script>
-
+    @if($menu)
     <dialog class="mobile-menu">
         <div class="mobile-menu__wrapper">
             <div class="mobile-menu__menuContainer scrollable scrollable--vertical" data-scrollable="true">
@@ -405,6 +405,7 @@
         </div>
     </dialog> --}}
     <!--/. Mobile Menu End -->
+    @endif
     @if ($domains->count() > 1)
     <!-- Modal Language Begin -->
     <dialog class="modal modal--footerHidden modal--slide" id="modal-lang" aria-hidden="true">
