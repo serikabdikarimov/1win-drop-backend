@@ -212,7 +212,7 @@ class PagesController extends Controller
 
     public function editSeo($pageId)
     {
-        $page = Page::where('id', $pageId)->select('id', 'name', 'meta_title', 'meta_description', 'meta_keywords')->first();
+        $page = Page::where('id', $pageId)->select('id', 'name', 'meta_title', 'meta_description', 'meta_keywords', 'og_image')->first();
         if (!$page) {
             return abort(404);
         }
@@ -225,6 +225,19 @@ class PagesController extends Controller
         $requestData = $request->all();
 
         $page = Page::findOrfail($pageId);
+
+        if ($requestData['og_image'] != null) {
+            $check = strripos($requestData['og_image'], "/");
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['og_image']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['og_image'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['og_image'] = $imageId->id;
+        }
 
         $page->update($requestData);
 

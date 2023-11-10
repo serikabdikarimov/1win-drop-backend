@@ -35,14 +35,14 @@
     <meta property="og:locale" content="{{ $domain->code }}" />
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ isset($page->title) ? $page->title : env('APP_NAME') }}">
-    <meta property="og:image" content="https://{{ request()->getHost()}}/static/img/general/logo.svg">
+    <meta property="og:image" content="https://{{ request()->getHost()}}/storage/uploads/{{ $page->getOgImage != null ? $page->getOgImage->url : '' }}">
     <meta property="og:url" content="{{ 'https://' . $domain->locale_name }}{{ $domain->path($domain->id, request()->path()) != null && $domain->path($domain->id, request()->path())->slug != '/' ? '/' . request()->path() : '' }}">
     <meta property="og:description" content="{{ isset($page) && $page->meta_description != null ? $page->meta_description : $settings->meta_description }}">
     {{-- twitter tags --}}
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{ isset($page) && $page->meta_title != null ? $page->meta_title : $settings->meta_title }}">
     <meta name="twitter:description" content="{{ isset($page) && $page->meta_description != null ? $page->meta_description : $settings->meta_description }}">
-    <meta name="twitter:image" content="https://{{ request()->getHost() }}/static/img/general/logo.svg">
+    <meta name="twitter:image" content="https://{{ request()->getHost() }}/storage/uploads/{{ $page->getOgImage != null ? $page->getOgImage->url : '' }}">
     <meta name="twitter:url" content="{{ 'https://' . $domain->locale_name }}{{ $domain->path($domain->id, request()->path()) != null && $domain->path($domain->id, request()->path())->slug != '/' ? '/' . request()->path() : '' }}" />
 
     @if (isset($page) && isset($page->autor_id) && $page->author->page($page->author->id) != null)

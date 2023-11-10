@@ -24,7 +24,7 @@ class Page extends Model
     const ACTIVE = 2;
     const SOON = 1;
     const NO_ACTIVE = 0;
-    
+
     const PAGE_STATUSES = [
         2 => 'Опубликовано',
         1 => 'Скоро',
@@ -53,7 +53,7 @@ class Page extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'title', 'banner', 'content', 'add_content', 'brand_id', 'slug', 'meta_title', 'meta_description', 'meta_keywords', 'type', 'type_content_id', 'status', 'autor_id', 'custom_schema', 'locale_id', 'showcase'];
+    protected $fillable = ['name', 'title', 'banner', 'content', 'add_content', 'brand_id', 'slug', 'meta_title', 'meta_description', 'meta_keywords', 'type', 'type_content_id', 'status', 'autor_id', 'custom_schema', 'locale_id', 'showcase', 'og_image'];
 
     public function getBrand()
     {
@@ -63,6 +63,11 @@ class Page extends Model
     public function getBanner()
     {
         return $this->hasOne(Gallery::class, 'id', 'banner');
+    }
+
+    public function getOgImage()
+    {
+        return $this->hasOne(Gallery::class, 'id', 'og_image');
     }
 
     public function showcase() {
@@ -77,7 +82,7 @@ class Page extends Model
     public function getBrandInWiew($item, $domainName)
     {
         $domain = Localization::where('locale_name', $domainName)->first();
-        
+
         return Brand::where(['slug' => $item, 'locale_id' => $domain->id])->first();
     }
 
@@ -90,12 +95,12 @@ class Page extends Model
     {
         $domainName = request()->getHost();
         $domain = Localization::where('locale_name', $domainName)->first();
-        
+
         return MenuCategory::where(['code' => $code, 'locale_id' => $domain->id])->first();
     }
 
     public static function getSlider($pageId)
-    {        
+    {
         return Slider::where(['page_id' => $pageId, 'status' => 1])->first();
     }
 
@@ -132,17 +137,17 @@ class Page extends Model
         $links = HeadingLinks::where(['locale_id' => $langId, 'page_id' => $pageId])->first();
         if ($links) {
             $three = '<ol>';
-            
+
             foreach (json_decode($links->data) as $value) {
                 $three .= $this->three('', $value);
             }
-            
+
             // $faqs = Faq::where(['locale_id' => $langId, 'page_id' => $pageId])->get();
-            
+
             // if ($faqs->count() > 0) {
             //     $three .='<li><a href="#faqs" rel="noindex nofollow">'. __('messages.faqs') . '</a>';
             //     $three .='<ol>';
-                
+
             //     foreach ($faqs as $item) {
             //         $three .='<li><a href="#' . Str::slug($item->question) . '">' . $item->question . '</a></li>';
             //     }
@@ -152,8 +157,8 @@ class Page extends Model
 
             $three .= '</ol>';
         }
-        
-        
+
+
         return $three;
     }
 
@@ -163,17 +168,17 @@ class Page extends Model
         if ($value !=null) {
             foreach ($value as $item) {
                 $three .= '<li><a href="#' . $item->link . '">' . $item->title .'</a>';
-                
+
                 if (isset($item->subItems)) {
                     $three .= '<ol>';
                     $three .= $this->three('', $item->subItems);
                     $three .= '</ol>';
                 }
-    
+
                 $three .= '</li>';
             }
         }
-        
+
 
         return $three;
     }
@@ -210,16 +215,16 @@ class Page extends Model
         $lang = Localization::where('locale_name',request()->getHost())->first();
 
         $author = Autor::where(['locale_id' => $lang->id, 'id' => $authorId])->first();
-        
+
         return $author;
     }
 
     public static function getReviews($pageId)
     {
         $lang = Localization::where('locale_name',request()->getHost())->first();
-        
+
         $reviews = Review::where(['locale_id' => $lang->id, 'page_id' => $pageId, 'is_active' => 2])->get();
-        
+
         return $reviews;
     }
 }
