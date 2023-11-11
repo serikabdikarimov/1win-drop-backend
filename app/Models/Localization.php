@@ -50,7 +50,7 @@ class Localization extends Model
     {
         $localization = Localization::orderBy('id', 'ASC')->first();
 
-        return $localization->code;
+        return $localization->id;
     }
 
     public static function getSocials($id)
