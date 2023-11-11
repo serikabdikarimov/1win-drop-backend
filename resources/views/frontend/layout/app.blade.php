@@ -712,6 +712,9 @@
     @if (isset($page) && $page->getSchema($domain->id, $page->id, 'faqs') != null)
         {!! $page->getSchema($domain->id, $page->id, 'faqs')->data !!}
     @endif
+    @if (isset($page) && $page->custom_schema)
+        {!! $page->custom_schema !!}
+    @endif
 @endif
 </body>
 </html>
