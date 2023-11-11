@@ -45,7 +45,7 @@ class Domain extends Model
     {
         $domain = Domain::orderBy('id', 'ASC')->first();
 
-        return $domain->code;
+        return $domain->id;
     }
 
     public function getIcon()
@@ -71,14 +71,14 @@ class Domain extends Model
         $domainName = request()->getHost();
         $domain = Domain::where('domain_name', $domainName)->first();
         if (!$domain) {
-            $domain = Domain::first(); 
+            $domain = Domain::first();
         }
         return MenuCategory::where(['code' => $code, 'locale_id' => $domain->id])->first();
     }
     public static function path($domainId, $slug)
     {
         $path = Page::where(['status' => 2,'locale_id' => $domainId, 'slug' => $slug])->first();
-        
+
         return $path;
     }
 }
