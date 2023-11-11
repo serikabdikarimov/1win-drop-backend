@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         //Получаем настройки сайта (тип)
         view()->composer('*', function ($view) {
+
             $localizationFromDb = \App\Models\Localization::orderBy('id', 'ASC')->first();
 
             if ($localizationFromDb) {
@@ -83,7 +84,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('admin.form-appends.brands', function ($view) {
             $domainCode = session('locale_id') != null ? session('locale_id') : \App\Models\Localization::defaultDomainCode(); //Получаем код текущего языка
-            $domain = \App\Models\Localization::where('code', $domainCode)->first(); //Получаем id код текущего языка
+            $domain = \App\Models\Localization::where('id', $domainCode)->first(); //Получаем id код текущего языка
 
             $view->with([
                 'brands' => \App\Models\Brand::where('locale_id', $domain->id)->orderBy('name', 'ASC')->get()
