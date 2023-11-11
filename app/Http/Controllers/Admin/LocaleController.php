@@ -15,6 +15,6 @@ class LocaleController extends Controller
         session(['admin_locale' => $request->locale]);
         session(['locale_id' => $localization->id]);
 
-        return session('admin_locale');
+        return $localization->locale_name;
     }
 }
