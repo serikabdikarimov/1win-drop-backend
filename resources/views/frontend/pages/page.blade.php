@@ -130,10 +130,10 @@
                         </div>
                         {{--</section>--}}
                     @endif
-                    @if ($page->headerLinks($page->id, $currentLocalization->id) != null)
+                    @if ($page->headerLinks($page->id, $domain->id) != null)
                         <details>
                             <summary>{{ __('messages.Содержание') }}</summary>
-                            {!! $page->headerLinks($page->id, $currentLocalization->id)!!}
+                            {!! $page->headerLinks($page->id, $domain->id)!!}
                         </details>
                     @endif
                     @if ($page->add_content != "null" && $page->add_content != null)
@@ -380,7 +380,7 @@
                                     <div class="brand-features__row">
                                         <div class="brand-features__heading">
                                             <div class="brand-features__icon">
-                                                <img src="/storage/uploads/{{ $page->getAttributeToFront($item->attribute)->getIcon($item->attribute, $currentLocalization->id)->url }}" width="20" height="18" alt="{{ $page->getAttributeToFront($item->attribute)->getIcon($item->attribute, $currentLocalization->id)->alt }}" title="{{ $page->getAttributeToFront($item->attribute)->getIcon($item->attribute, $currentLocalization->id)->attr_title }}">
+                                                <img src="/storage/uploads/{{ $page->getAttributeToFront($item->attribute)->getIcon($item->attribute, $domain->id)->url }}" width="20" height="18" alt="{{ $page->getAttributeToFront($item->attribute)->getIcon($item->attribute, $domain->id)->alt }}" title="{{ $page->getAttributeToFront($item->attribute)->getIcon($item->attribute, $domain->id)->attr_title }}">
                                             </div>
                                             <div class="brand-features__title">{{ $page->getAttributeToFront($item->attribute)->title }}</div>
                                         </div>
