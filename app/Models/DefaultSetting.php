@@ -58,12 +58,18 @@ class DefaultSetting extends Model
         'manifest_name',
         'favicon_32',
         'favicon_64',
-        'favicon_180'
+        'favicon_180',
+        'lang_icon'
     ];
 
     public function getLogo()
     {
         return $this->hasOne(Gallery::class, 'id', 'logo');
+    }
+
+    public function getLangIcon()
+    {
+        return $this->hasOne(Gallery::class, 'id', 'lang_icon');
     }
 
     public function getFavicon32(){

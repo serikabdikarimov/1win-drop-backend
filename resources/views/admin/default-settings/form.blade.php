@@ -27,6 +27,19 @@
             </div>
             {!! $errors->first('banner', '<p class="help-block">:message</p>') !!}
         </div>
+
+        <div class="form-group {{ $errors->has('lang_icon') ? 'has-error' : ''}}">
+            <label for="lang_icon" class="control-label">{{ 'Иконка переключателя языка' }}</label>
+            <input type="text" class="form-control lang_icon" data-icon="lang_icon" name="lang_icon" value="{{ isset($defaultsetting->getLangIcon->url) ? $defaultsetting->getLangIcon->url : ''}}" hidden>
+            <p><span class="btn btn-warning upload-icon" data-icon="lang_icon" onclick="load_file_manager()"><i class="fas fa-cloud-upload-alt"></i> Загрузить</span></p>
+            <div id="lang_icon" class="col-md-6">
+                @if (isset($defaultsetting->getLangIcon))
+                    <img class="img-fluid" src="/storage/uploads/{{ $defaultsetting->getLangIcon->url }}">
+                    {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
+                @endif
+            </div>
+            {!! $errors->first('lang_icon', '<p class="help-block">:message</p>') !!}
+        </div>
     </div>
     <div class="col-md-6">
         <div class="form-group {{ $errors->has('meta_title') ? 'has-error' : ''}}">
@@ -60,7 +73,7 @@
                     {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
                 @endif
             </div>
-            {!! $errors->first('banner', '<p class="help-block">:message</p>') !!}
+            {!! $errors->first('favicon_32', '<p class="help-block">:message</p>') !!}
         </div>
         <br>
         <div class="form-group {{ $errors->has('favicon_64') ? 'has-error' : ''}}">
@@ -73,7 +86,7 @@
                     {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
                 @endif
             </div>
-            {!! $errors->first('banner', '<p class="help-block">:message</p>') !!}
+            {!! $errors->first('favicon_64', '<p class="help-block">:message</p>') !!}
         </div>
         <br>
         <div class="form-group {{ $errors->has('favicon_180') ? 'has-error' : ''}}">
@@ -86,7 +99,7 @@
                     {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
                 @endif
             </div>
-            {!! $errors->first('banner', '<p class="help-block">:message</p>') !!}
+            {!! $errors->first('favicon_180', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
     <div class="col-md-6">
@@ -127,7 +140,7 @@
                     {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
                 @endif
             </div>
-            {!! $errors->first('banner', '<p class="help-block">:message</p>') !!}
+            {!! $errors->first('manifest_icon_192', '<p class="help-block">:message</p>') !!}
         </div>
         <br>
         <div class="form-group {{ $errors->has('manifest_icon_512') ? 'has-error' : ''}}">
@@ -140,7 +153,7 @@
                     {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
                 @endif
             </div>
-            {!! $errors->first('banner', '<p class="help-block">:message</p>') !!}
+            {!! $errors->first('manifest_icon_512', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
 </div>

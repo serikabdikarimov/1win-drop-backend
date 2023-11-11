@@ -25,7 +25,6 @@ class UpdateDomainRequest extends FormRequest
             'name' => 'required|min:3|max:255|unique:localization,name,' . $this->localization,
             'locale_name' => 'required|min:2|max:255|unique:localization,locale_name,' . $this->localization,
             'code' => 'unique:localization,code,' . $this->localization,
-            'icon' => 'required|min:3|max:255',
             'is_active' => 'required|in:0,1',
         ];
     }

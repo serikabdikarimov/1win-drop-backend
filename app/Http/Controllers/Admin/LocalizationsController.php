@@ -27,7 +27,7 @@ class LocalizationsController extends Controller
                 ->orWhere('locale_name', 'LIKE', "%$keyword%")
                 ->orWhere('code', 'LIKE', "%$keyword%");
         }
-        
+
         $domains = $builder->paginate($perPage);
 
         return view('admin.domains.index', compact('domains'));
@@ -52,21 +52,8 @@ class LocalizationsController extends Controller
      */
     public function store(StoreDomainRequest $request)
     {
-        
-        $requestData = $request->all();
 
-        if ($requestData['icon'] != null) {
-            $check = strripos($requestData['icon'], "/");
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['icon']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['icon'];
-            }
-            
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['icon'] = $imageId->id;
-        }
+        $requestData = $request->all();
 
         Localization::create($requestData);
 
@@ -112,22 +99,8 @@ class LocalizationsController extends Controller
     public function update(UpdateDomainRequest $request, $id)
     {
         $requestData = $request->all();
-        
+
         $localization = Localization::findOrFail($id);
-
-        if ($requestData['icon'] != null) {
-            $check = strripos($requestData['icon'], "/");
-            if (is_numeric($check)) {
-                $url = explode('/', $requestData['icon']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['icon'];
-            }
-            
-            $imageId = Gallery::where(['url' => $url, 'locale_id' => $id])->first();
-
-            $requestData['icon'] = $imageId->id;
-        }
 
         $localization->update($requestData);
 

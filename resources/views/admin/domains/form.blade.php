@@ -40,19 +40,6 @@
     {!! $errors->first('is_active', '<p class="help-block">:message</p>') !!}
 </div>
 
-<div class="form-group {{ $errors->has('icon') ? 'has-error' : ''}}">
-    <label for="icon" class="control-label">{{ 'Иконка' }}</label>
-    <input id="insertImage" type="text" class="form-control" name="icon" value="{{ isset($domain->getIcon->url) ? $domain->getIcon->url : ''}}" hidden>
-    <p><span class="btn btn-warning" onclick="load_file_manager()"><i class="fas fa-cloud-upload-alt"></i> Загрузить</span><span class="btn btn-danger" onclick="deleteImage()"><i class="far fa-trash-alt"></i></span></p>
-    <div id="imageContainer" class="col-md-6">
-        @if (isset($domain->getIcon))
-            <img class="img-fluid" src="/storage/uploads/{{ $domain->getIcon->url }}">
-            {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
-        @endif
-    </div>
-    {!! $errors->first('banner', '<p class="help-block">:message</p>') !!}
-</div>
-
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Обновить' : 'Создать' }}">
 </div>

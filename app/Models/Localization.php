@@ -16,7 +16,7 @@ class Localization extends Model
         self::ACTIVE => 'Активен',
         self::NOT_ACTIVE => 'Отключен',
     ];
-    
+
     protected $table = 'localization';
 
     /**
@@ -53,11 +53,6 @@ class Localization extends Model
         return $localization->code;
     }
 
-    public function getIcon()
-    {
-        return $this->hasOne(Gallery::class, 'id', 'icon');
-    }
-
     public static function getSocials($id)
     {
         return Social::where('locale_id', $id)->first();
@@ -76,14 +71,17 @@ class Localization extends Model
         $localeName = request()->getHost();
         $localization = Localization::where('locale_name', $localeName)->first();
         if (!$localization) {
-            $localization = Localization::first(); 
+            $localization = Localization::first();
         }
         return MenuCategory::where(['code' => $code, 'locale_id' => $localization->id])->first();
     }
     public static function path($localeId, $slug)
     {
         $path = Page::where(['status' => 2,'locale_id' => $localeId, 'slug' => $slug])->first();
-        
+
         return $path;
+    }
+    public function getSettings(){
+        return $this->hasOne(DefaultSetting::class, 'locale_id', 'id');
     }
 }

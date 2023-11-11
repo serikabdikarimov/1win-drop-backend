@@ -49,6 +49,19 @@ class DefaultSettingsController extends Controller
             $requestData['logo'] = $imageId->id;
         }
 
+        if ($requestData['lang_icon'] != null) {
+            $check = strripos($requestData['lang_icon'], "/");
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['lang_icon']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['lang_icon'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['lang_icon'] = $imageId->id;
+        }
+
         if ($requestData['favicon_32'] != null) {
             $check = strripos($requestData['favicon_32'], "/");
 
@@ -153,6 +166,19 @@ class DefaultSettingsController extends Controller
 
             $imageId = Gallery::where('url', $url)->first();
             $requestData['logo'] = $imageId->id;
+        }
+
+        if ($requestData['lang_icon'] != null) {
+            $check = strripos($requestData['lang_icon'], "/");
+            if (is_numeric($check)) {
+                $url = explode('/',$requestData['lang_icon']);
+                $url = $url[3];
+            } else {
+                $url = $requestData['lang_icon'];
+            }
+
+            $imageId = Gallery::where('url', $url)->first();
+            $requestData['lang_icon'] = $imageId->id;
         }
 
         if ($requestData['favicon_32'] != null) {

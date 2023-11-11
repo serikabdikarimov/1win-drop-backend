@@ -64,7 +64,7 @@
         <li class="header__rightItem">
             <button type="button" class="lang-selector" data-micromodal-trigger="modal-lang">
                 <span class="visuallyHidden">{{ __('messages.Выбор языка страницы') }}</span>
-                <img class="lang-selector__icon" src="/storage/uploads/{{ $domain->getIcon->url }}" width="24" height="24" title="{{ $domain->getIcon->title }}" alt="{{ $domain->getIcon->alt }}">
+                <img class="lang-selector__icon" src="/storage/uploads/{{ $settings->getLangIcon->url }}" width="24" height="24" title="{{ $settings->getLangIcon->title }}" alt="{{ $settings->getLangIcon->alt }}">
                 <span class="lang-selector__text">{{ $domain->locale_name }}</span>
             </button>
         </li>

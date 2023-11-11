@@ -25,7 +25,6 @@ class StoreDomainRequest extends FormRequest
             'name' => 'required|min:3|max:255|unique:localization,name,' . $this->name,
             'locale_name' => 'required|min:3|max:255|unique:localization,locale_name,' . $this->locale_name,
             'code' => 'unique:localization,code,' . $this->code,
-            'icon' => 'image|mimes:png,webp,svg,jpg,jpeg|max:2048',
             'is_active' => 'required|in:0,1'
         ];
     }

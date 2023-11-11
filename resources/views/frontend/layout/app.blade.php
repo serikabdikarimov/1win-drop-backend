@@ -412,7 +412,7 @@
                                         <li role="presentation">
                                             <button type="button" class="actionList__item" role="menuitem">
                                                 <span class="actionList__prefix">
-                                                    <img src="/storage/uploads/{{ $item->getIcon->url }}" alt="{{ $item->getIcon->getAlt($item->getIcon->url, $domain->id) }}" width="24" height="24">
+                                                    <img src="/storage/uploads/{{ $item->getSettings->getLangIcon->url }}" alt="{{ $item->getSettings->getLangIcon->alt }}" width="24" height="24">
                                                 </span>
                                                 <span class="actionList__text">{{ $item->locale_name }}</span>
                                             </button>
