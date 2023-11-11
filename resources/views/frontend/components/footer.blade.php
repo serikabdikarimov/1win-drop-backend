@@ -13,7 +13,7 @@
                         <div class="footer__langSelector">
                             <button type="button" class="button lang-selector" aria-label="Смена языка" data-micromodal-trigger="modal-lang">
                                 <span class="button__icon">
-                                    <img src="/storage/uploads/{{ $settings->getLangIcon->url }}" alt="{{ $settings->getLangIcon->alt }}" alt="{{ $settings->getLangIcon->title }}" width="24" height="24">
+                                    <img src="/storage/uploads/{{ $settings->getLangIcon != null ? $settings->getLangIcon->url : '' }}" alt="{{ $settings->getLangIcon != null ? $settings->getLangIcon->alt : '' }}" alt="{{ $settings->getLangIcon ? $settings->getLangIcon->title : '' }}" width="24" height="24">
                             </span>
                                 <span class="button__text">{{ $domain->locale_name }}</span>
                                 <span class="button__icon">
