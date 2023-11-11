@@ -12,9 +12,9 @@ class LocaleController extends Controller
     {
         $localization = Localization::where('code', $request->locale)->first();
 
-        session('admin_locale', $request->locale);
-        session('locale_id', $localization->id);
+        session(['admin_locale' => $request->locale]);
+        session(['locale_id' => $localization->id]);
 
-        return $localization->locale_name;
+        return session('admin_locale');
     }
 }
