@@ -251,7 +251,9 @@
                                     </li>
                                 </ul>
                             @elseif (key($blocks) == 'block')
-                                <h2>{{ $blocks->block->title }}</h2>
+                                @if ($blocks->block->title)
+                                    <h2 id="{{ \Illuminate\Support\Str::slug($blocks->block->title) }}">{{ $blocks->block->title }}</h2>
+                                @endif
                                 {!! $blocks->block->content !!}
                             @elseif (key($blocks) == 'faqs')
                                 @php
