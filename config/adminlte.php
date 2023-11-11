@@ -418,6 +418,12 @@ return [
                     'can'  => ['admin', 'content'],
                 ],
                 [
+                    'text' => 'Группы',
+                    'url' => 'admin/groups',
+                    'icon' => 'fas fa-cogs',
+                    'can'  => ['admin', 'content'],
+                ],
+                [
                     'text' => 'Shema Org',
                     'url' => 'admin/schema',
                     'icon' => 'fas fa-wrench',

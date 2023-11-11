@@ -102,7 +102,7 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with([
                 'domain' => $domain,
-                'domains' => \App\Models\Localization::orderBy('locale_name', 'ASC')->get(),
+                'domains' => \App\Models\Localization::whereNotNull('group_id')->where('group_id', $domain->group_id)->orderBy('locale_name', 'ASC')->get(),
                 'slug' => request()->path(),
                 'settings' => \App\Models\DefaultSetting::where('locale_id', $domain->id)->first(),
                 'organization' => ModelsSchema::where(['locale_id' => $domain->id, 'schema_type' => 'organization'])->first(),

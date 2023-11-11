@@ -10,7 +10,7 @@
 
     @include('flash-message')
     <a href="{{ url('/admin/groups/create') }}" class="btn btn-success btn-sm" title="Add New Group">
-        <i class="fa fa-plus" aria-hidden="true"></i> Add New
+        <i class="fa fa-plus" aria-hidden="true"></i> Добавить
     </a>
 
     <form method="GET" action="{{ url('/admin/groups') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">

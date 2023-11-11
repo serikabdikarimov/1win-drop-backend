@@ -59,8 +59,9 @@
         </button>
     </nav>
     @endif
+
     <ul class="header__right">
-        @if ($domain->group_id)
+        @if ($domains->count() > 1)
         <li class="header__rightItem">
             <button type="button" class="lang-selector" data-micromodal-trigger="modal-lang">
                 <span class="visuallyHidden">{{ __('messages.Выбор языка страницы') }}</span>
