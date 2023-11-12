@@ -96,10 +96,15 @@ class DictionaryController extends Controller
         $domains = Localization::all();
 
         foreach ($domains as $domain) {
-            $dictionary = Dictionary::where(['uid' => $uid, 'locale_id' => $domain->id])->first();
-            $dictionary->update([
+            Dictionary::updateOrCreate(
+            [
+                'uid' => $uid,
+                'locale_id' => $domain->id
+            ],
+            [
                 'translate' => $requestData['translate'][$domain->code]
             ]);
+
 
         }
 
