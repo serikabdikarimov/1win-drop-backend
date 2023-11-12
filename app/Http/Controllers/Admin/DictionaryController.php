@@ -93,20 +93,14 @@ class DictionaryController extends Controller
     {
         $requestData = $request->all();
 
-        $dictionary = Dictionary::where('uid', $uid)->get();
-
-        if ($dictionary->count() == 0) {
-            abort(404);
-        }
-
         $domains = Localization::all();
 
         foreach ($domains as $domain) {
-            foreach($dictionary as $item) {
-                $item->update([
-                    'translate' => $requestData['translate'][$domain->code]
-                ]);
-            }
+            $dictionary = Dictionary::where(['uid' => $uid, 'locale_id' => $domain->id])->first();
+            $dictionary->update([
+                'translate' => $requestData['translate'][$domain->code]
+            ]);
+
         }
 
         return redirect('admin/dictionary')->with('success', 'Текст в словаре обновлен!');
