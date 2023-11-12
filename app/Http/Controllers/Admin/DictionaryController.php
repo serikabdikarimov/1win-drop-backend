@@ -102,6 +102,9 @@ class DictionaryController extends Controller
                 'locale_id' => $domain->id
             ],
             [
+                'code' => $requestData['code'],
+                'uid' => $uid,
+                'locale_id' => $domain->id,
                 'translate' => $requestData['translate'][$domain->code]
             ]);
 
