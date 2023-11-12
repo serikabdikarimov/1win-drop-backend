@@ -29,12 +29,12 @@ class RobotsController extends Controller
             'description' => $manifest->manifest_description,
             'icons' => [
                 [
-                    "src" => $manifest->manifest_192 ? '/storage/uploads/' . $manifest->manifest_192 : '',
+                    "src" => $manifest->manifest_192 ? '/storage/' . $domain->locale_name . '/' . $manifest->manifest_192 : '',
                     "sizes" => "192x192",
                     "type" => "image/png"
                 ],
                 [
-                    "src" => $manifest->manifest_512 ? '/storage/uploads/' . $manifest->manifest_512 : '',
+                    "src" => $manifest->manifest_512 ? '/storage/' . $domain->locale_name . '/' . $manifest->manifest_512 : '',
                     "sizes" => "512x512",
                     "type" => "image/png"
                 ]
