@@ -188,12 +188,17 @@ class GalleryController extends Controller
         $domains = Localization::all();
 
         foreach ($domains as $domain) {
-            $galleryUpdate = Gallery::where(['url' => $gallery->url, 'locale_id' => $domain->id])->first();
+            //$galleryUpdate = Gallery::where(['url' => $gallery->url, 'locale_id' => $domain->id])->first();
 
             $alt = $requestData['alt'][$domain->code];
             $attrTitle = $requestData['attr_title'][$domain->code];
 
-            $galleryUpdate->update([
+            Gallery::updateOrCreate(
+                [
+                    'url' => $gallery->url,
+                    'locale_id' => $domain->id
+                ],
+                [
                 'title' => $requestData['title'],
                 'url' => $imageName,
                 'alt' => $alt,

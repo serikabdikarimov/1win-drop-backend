@@ -16,12 +16,12 @@
         <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $item->code }}" role="tabpanel" aria-labelledby="{{ $item->code }}-tab">
             <div class="form-group {{ $errors->has('attr_title.' . $item->site_name) ? 'has-error' : ''}}">
                 <label for="attr_title_{{ $item->id }}" class="control-label">{{ 'Title (' . $item->code . ')' }}</label>
-                <input class="form-control" name="attr_title[{{ $item->code }}]" type="text" id="attr_title_{{ $item->id }}" value="{{ isset($gallery) && $gallery->getTitle($gallery->url, $item->id) != null ? $gallery->getTitle($gallery->url, $item->id) : old('alt.' . $item->code)}}" >
+                <input class="form-control" name="attr_title[{{ $item->code }}]" type="text" id="attr_title_{{ $item->id }}" value="{{ isset($gallery) && $gallery->getTitle($gallery->url, $item->id) != null ? $gallery->getTitle($gallery->url, $item->id)->attr_title : old('alt.' . $item->code)}}" >
                 {!! $errors->first('attr_title.' . $item->code, '<p class="help-block">:message</p>') !!}
             </div>
             <div class="form-group {{ $errors->has('alt.' . $item->site_name) ? 'has-error' : ''}}">
                 <label for="alt_{{ $item->id }}" class="control-label">{{ 'Alt (' . $item->code . ')' }}</label>
-                <input class="form-control" name="alt[{{ $item->code }}]" type="text" id="alt_{{ $item->id }}" value="{{ isset($gallery) && $gallery->getAlt($gallery->url, $item->id) != null ? $gallery->getAlt($gallery->url, $item->id) : old('alt.' . $item->code)}}" >
+                <input class="form-control" name="alt[{{ $item->code }}]" type="text" id="alt_{{ $item->id }}" value="{{ isset($gallery) && $gallery->getAlt($gallery->url, $item->id) != null ? $gallery->getAlt($gallery->url, $item->id)->alt : old('alt.' . $item->code)}}" >
                 {!! $errors->first('alt.' . $item->code, '<p class="help-block">:message</p>') !!}
             </div>
         </div>

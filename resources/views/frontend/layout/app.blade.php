@@ -18,11 +18,11 @@
     <meta name="revisit-after" content="7 days">
 
     <!-- Favicons -->
-    <link rel="icon" href="{{ $settings->getFavicon32 != null ? '/storage/uploads/' . $settings->getFavicon32->url : '' }}" sizes="any">
+    <link rel="icon" href="{{ $settings->favicon_32 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_32 : '' }}" sizes="any">
     <!-- 32×32 -->
-    <link rel="icon" href="{{ $settings->getFavicon64 != null ? '/storage/uploads/' . $settings->getFavicon64->url : '' }}" type="image/svg+xml">
+    <link rel="icon" href="{{ $settings->favicon_64 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_64 : '' }}" type="image/svg+xml">
     <!-- 64x64 -->
-    <link rel="apple-touch-icon" href="{{ $settings->getFavicon180 != null ? '/storage/uploads/' . $settings->getFavicon180->url : '' }}">
+    <link rel="apple-touch-icon" href="{{ $settings->favicon_180 ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_180 : '' }}">
     <!-- 180×180 -->
 
     <link rel="manifest" href="/manifest.webmanifest">

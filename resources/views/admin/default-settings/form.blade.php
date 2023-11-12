@@ -22,7 +22,7 @@
             <div id="imageContainer" class="col-md-6">
                 @if (isset($defaultsetting->getLogo))
                     <img class="img-fluid" src="/storage/uploads/{{ $defaultsetting->getLogo->url }}">
-                    {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
+
                 @endif
             </div>
             {!! $errors->first('banner', '<p class="help-block">:message</p>') !!}
@@ -35,7 +35,7 @@
             <div id="lang_icon" class="col-md-6">
                 @if (isset($defaultsetting->getLangIcon))
                     <img class="img-fluid" src="/storage/uploads/{{ $defaultsetting->getLangIcon->url }}">
-                    {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
+
                 @endif
             </div>
             {!! $errors->first('lang_icon', '<p class="help-block">:message</p>') !!}
@@ -65,12 +65,10 @@
     <div class="col-md-6">
         <div class="form-group {{ $errors->has('favicon_32') ? 'has-error' : ''}}">
             <label for="favicon_32" class="control-label">{{ 'Favicon (32x32)' }}</label>
-            <input type="text" class="form-control favicon-32" data-icon="favicon-32" name="favicon_32" value="{{ isset($defaultsetting->getFavicon32->url) ? $defaultsetting->getFavicon32->url : ''}}" hidden>
-            <p><span class="btn btn-warning upload-icon" data-icon="favicon-32" onclick="load_file_manager()"><i class="fas fa-cloud-upload-alt"></i> Загрузить</span></p>
+            <input id="favicon_32" type="file" class="form-control" name="favicon_32" value="{{ isset($defaultsetting) ? $defaultsetting->favicon_32 : ''}}">
             <div id="favicon-32" class="col-md-6">
-                @if (isset($defaultsetting->getFavicon32))
-                    <img class="img-fluid" src="/storage/uploads/{{ $defaultsetting->getFavicon32->url }}">
-                    {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
+                @if (isset($defaultsetting) && $defaultsetting->favicon_32)
+                    <img class="img-fluid" src="/storage/{{ $locale->locale_name }}/{{ $defaultsetting->favicon_32 }}">
                 @endif
             </div>
             {!! $errors->first('favicon_32', '<p class="help-block">:message</p>') !!}
@@ -78,12 +76,10 @@
         <br>
         <div class="form-group {{ $errors->has('favicon_64') ? 'has-error' : ''}}">
             <label for="favicon_64" class="control-label">{{ 'Favicon (64x64)' }}</label>
-            <input type="text" class="form-control favicon-64" data-icon="favicon-64" name="favicon_64" value="{{ isset($defaultsetting->getFavicon64->url) ? $defaultsetting->getFavicon64->url : ''}}" hidden>
-            <p><span class="btn btn-warning upload-icon" data-icon="favicon-64" onclick="load_file_manager()"><i class="fas fa-cloud-upload-alt"></i> Загрузить</span></p>
+            <input id="favicon_64" type="file" class="form-control" name="favicon_64" value="{{ isset($defaultsetting->favicon_64) ? $defaultsetting->favicon_64 : ''}}">
             <div id="favicon-64" class="col-md-6">
-                @if (isset($defaultsetting->getFavicon64))
-                    <img class="img-fluid" src="/storage/uploads/{{ $defaultsetting->getFavicon64->url }}">
-                    {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
+                @if (isset($defaultsetting) && $defaultsetting->favicon_64)
+                    <img class="img-fluid" src="/storage/{{ $locale->locale_name }}/{{ $defaultsetting->favicon_64 }}">
                 @endif
             </div>
             {!! $errors->first('favicon_64', '<p class="help-block">:message</p>') !!}
@@ -91,12 +87,10 @@
         <br>
         <div class="form-group {{ $errors->has('favicon_180') ? 'has-error' : ''}}">
             <label for="favicon_180" class="control-label">{{ 'Favicon (180x180)' }}</label>
-            <input type="text" class="form-control favicon-180" data-icon="favicon-180" name="favicon_180" value="{{ isset($defaultsetting->getFavicon180->url) ? $defaultsetting->getFavicon180->url : ''}}" hidden>
-            <p><span class="btn btn-warning upload-icon" data-icon="favicon-180" onclick="load_file_manager()"><i class="fas fa-cloud-upload-alt"></i> Загрузить</span></p>
+            <input id="favicon_180" type="file" class="form-control" name="favicon_180" value="{{ isset($defaultsetting->favicon_180) ? $defaultsetting->favicon_180 : ''}}">
             <div id="favicon-180" class="col-md-6">
-                @if (isset($defaultsetting->getFavicon180))
-                    <img class="img-fluid" src="/storage/uploads/{{ $defaultsetting->getFavicon180->url }}">
-                    {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
+                @if (isset($defaultsetting) && $defaultsetting->favicon_180)
+                    <img class="img-fluid" src="/storage/{{ $locale->locale_name }}/{{ $defaultsetting->favicon_180 }}">
                 @endif
             </div>
             {!! $errors->first('favicon_180', '<p class="help-block">:message</p>') !!}
@@ -126,31 +120,27 @@
         </div>
         <div class="form-group {{ $errors->has('manifest_background_color') ? 'has-error' : ''}}">
             <label for="manifest_background_color" class="control-label">{{ 'Manifest theme color' }}</label>
-            <input class="form-control" name="manifest_background_color" type="text" id="manifest_background_color" value="{{ isset($defaultsetting->manifest_background_color) ? $defaultsetting->manifest_background_color : ''}}" >
+            <input id="manifest_background_color" class="form-control" name="manifest_background_color" type="text" id="manifest_background_color" value="{{ isset($defaultsetting->manifest_background_color) ? $defaultsetting->manifest_background_color : ''}}" >
             {!! $errors->first('manifest_background_color', '<p class="help-block">:message</p>') !!}
         </div>
         <br>
-        <div class="form-group {{ $errors->has('manifest_icon_192') ? 'has-error' : ''}}">
-            <label for="manifest_icon_192" class="control-label">{{ 'Manifest icon (192x192)' }}</label>
-            <input type="text" class="form-control manifest-icon-192" data-icon="manifest-icon-192" name="manifest_192" value="{{ isset($defaultsetting->getManifestIcon192->url) ? $defaultsetting->getManifestIcon192->url : ''}}" hidden>
-            <p><span class="btn btn-warning upload-icon" data-icon="manifest-icon-192" onclick="load_file_manager()"><i class="fas fa-cloud-upload-alt"></i> Загрузить</span></p>
+        <div class="form-group {{ $errors->has('manifest_192') ? 'has-error' : ''}}">
+            <label for="manifest_192" class="control-label">{{ 'Manifest icon (192x192)' }}</label>
+            <input id="manifest_512" type="file" class="form-control" name="manifest_192" value="{{ isset($defaultsetting->manifest_192) ? $defaultsetting->manifest_192 : ''}}">
             <div id="manifest-icon-192" class="col-md-6">
-                @if (isset($defaultsetting->getManifestIcon192))
-                    <img class="img-fluid" src="/storage/uploads/{{ $defaultsetting->getManifestIcon192->url }}">
-                    {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
+                @if (isset($defaultsetting) && $defaultsetting->manifest_192)
+                    <img class="img-fluid" src="/storage/{{ $locale->locale_name }}/{{ $defaultsetting->manifest_192 }}">
                 @endif
             </div>
             {!! $errors->first('manifest_icon_192', '<p class="help-block">:message</p>') !!}
         </div>
         <br>
         <div class="form-group {{ $errors->has('manifest_icon_512') ? 'has-error' : ''}}">
-            <label for="manifest_icon_512" class="control-label">{{ 'Manifest icon (512x512)' }}</label>
-            <input type="text" class="form-control manifest-icon-512" data-icon="manifest-icon-512" name="manifest_512" value="{{ isset($defaultsetting->getManifestIcon512->url) ? $defaultsetting->getManifestIcon512->url : ''}}" hidden>
-            <p><span class="btn btn-warning upload-icon" data-icon="manifest-icon-512" onclick="load_file_manager()"><i class="fas fa-cloud-upload-alt"></i> Загрузить</span></p>
+            <label for="manifest_512" class="control-label">{{ 'Manifest icon (512x512)' }}</label>
+            <input id="manifest_512" type="file" class="form-control" name="manifest_512" value="{{ isset($defaultsetting->manifest_512) ? $defaultsetting->manifest_512 : ''}}">
             <div id="manifest-icon-512" class="col-md-6">
-                @if (isset($defaultsetting->getManifestIcon512))
-                    <img class="img-fluid" src="/storage/uploads/{{ $defaultsetting->getManifestIcon512->url }}">
-                    {{-- <p class="form-control">/storage/{{ $page->getBanner->url }}</p> --}}
+                @if (isset($defaultsetting) && $defaultsetting->manifest_512)
+                    <img class="img-fluid" src="/storage/{{ $locale->locale_name }}/{{ $defaultsetting->manifest_512 }}">
                 @endif
             </div>
             {!! $errors->first('manifest_icon_512', '<p class="help-block">:message</p>') !!}

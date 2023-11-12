@@ -36,14 +36,14 @@ class Gallery extends Model
     {
         $data = Gallery::where(['url' => $url, 'locale_id' => $locale_id])->first();
 
-        return $data->alt;
+        return $data;
     }
 
     public function getTitle($url, $locale_id)
     {
         $data = Gallery::where(['url' => $url, 'locale_id' => $locale_id])->first();
 
-        return $data->attr_title;
+        return $data;
     }
 
 

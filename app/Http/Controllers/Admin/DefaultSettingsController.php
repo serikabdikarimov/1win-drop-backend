@@ -10,6 +10,7 @@ use App\Models\Gallery;
 use App\Models\Robot;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DefaultSettingsController extends Controller
 {
@@ -32,7 +33,7 @@ class DefaultSettingsController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-
+        $locale = Localization::where('id', session('locale_id'))->first();
         $defaultsetting = DefaultSetting::first();
 
         if ($requestData['logo'] != null) {
@@ -62,74 +63,38 @@ class DefaultSettingsController extends Controller
             $requestData['lang_icon'] = $imageId->id;
         }
 
-        if ($requestData['favicon_32'] != null) {
-            $check = strripos($requestData['favicon_32'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['favicon_32']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['favicon_32'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['favicon_32'] = $imageId->id;
+        if (isset($requestData['favicon_32'])) {
+            $image = $request->file('favicon_32');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['favicon_32'] = $originalName;
+        }
+        if (isset($requestData['favicon_64'])) {
+            $image = $request->file('favicon_64');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['favicon_64'] = $originalName;
         }
 
-        if ($requestData['favicon_64'] != null) {
-            $check = strripos($requestData['favicon_64'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['favicon_64']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['favicon_64'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['favicon_64'] = $imageId->id;
+        if (isset($requestData['favicon_180'])) {
+            $image = $request->file('favicon_180');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['favicon_180'] = $originalName;
         }
 
-        if ($requestData['favicon_180'] != null) {
-            $check = strripos($requestData['favicon_180'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['favicon_180']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['favicon_180'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['favicon_180'] = $imageId->id;
+        if (isset($requestData['manifest_192'])) {
+            $image = $request->file('manifest_192');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['manifest_192'] = $originalName;
         }
 
-        if ($requestData['manifest_192'] != null) {
-            $check = strripos($requestData['manifest_192'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['manifest_192']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['manifest_192'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['manifest_192'] = $imageId->id;
-        }
-
-        if ($requestData['manifest_512'] != null) {
-            $check = strripos($requestData['manifest_512'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['manifest_512']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['manifest_512'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['manifest_512'] = $imageId->id;
+        if (isset($requestData['manifest_512'])) {
+            $image = $request->file('manifest_512');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['manifest_512'] = $originalName;
         }
 
         if (isset($defaultsetting)) {
@@ -147,13 +112,15 @@ class DefaultSettingsController extends Controller
     public function edit($domainId)
     {
         $defaultsetting = DefaultSetting::where('id', $domainId)->first();
-
-        return view('admin.default-settings.edit', compact('domainId', 'defaultsetting'));
+        $locale = Localization::where('id', $domainId)->first();
+        return view('admin.default-settings.edit', compact('domainId', 'defaultsetting', 'locale'));
     }
 
     public function update(Request $request, $domainId)
     {
         $requestData = $request->all();
+
+        $locale = Localization::where('id', $domainId)->first();
 
         if ($requestData['logo'] != null) {
             $check = strripos($requestData['logo'], "/");
@@ -181,74 +148,38 @@ class DefaultSettingsController extends Controller
             $requestData['lang_icon'] = $imageId->id;
         }
 
-        if ($requestData['favicon_32'] != null) {
-            $check = strripos($requestData['favicon_32'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['favicon_32']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['favicon_32'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['favicon_32'] = $imageId->id;
+        if (isset($requestData['favicon_32'])) {
+            $image = $request->file('favicon_32');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['favicon_32'] = $originalName;
+        }
+        if (isset($requestData['favicon_64'])) {
+            $image = $request->file('favicon_64');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['favicon_64'] = $originalName;
         }
 
-        if ($requestData['favicon_64'] != null) {
-            $check = strripos($requestData['favicon_64'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['favicon_64']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['favicon_64'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['favicon_64'] = $imageId->id;
+        if (isset($requestData['favicon_180'])) {
+            $image = $request->file('favicon_180');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['favicon_180'] = $originalName;
         }
 
-        if ($requestData['favicon_180'] != null) {
-            $check = strripos($requestData['favicon_180'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['favicon_180']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['favicon_180'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['favicon_180'] = $imageId->id;
+        if (isset($requestData['manifest_192'])) {
+            $image = $request->file('manifest_192');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['manifest_192'] = $originalName;
         }
 
-        if ($requestData['manifest_192'] != null) {
-            $check = strripos($requestData['manifest_192'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['manifest_192']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['manifest_192'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['manifest_192'] = $imageId->id;
-        }
-
-        if ($requestData['manifest_512'] != null) {
-            $check = strripos($requestData['manifest_512'], "/");
-
-            if (is_numeric($check)) {
-                $url = explode('/',$requestData['manifest_512']);
-                $url = $url[3];
-            } else {
-                $url = $requestData['manifest_512'];
-            }
-
-            $imageId = Gallery::where('url', $url)->first();
-            $requestData['manifest_512'] = $imageId->id;
+        if (isset($requestData['manifest_512'])) {
+            $image = $request->file('manifest_512');
+            $originalName = $image->getClientOriginalName();
+            Storage::disk('public')->put($locale->locale_name . '/' . $originalName, file_get_contents($image));
+            $requestData['manifest_512'] = $originalName;
         }
 
         DefaultSetting::updateOrCreate([
