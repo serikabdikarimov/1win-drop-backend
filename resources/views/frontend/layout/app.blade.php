@@ -287,7 +287,7 @@
         <div class="app__wrapper">
             <!-- Header Begin -->
             <header class="header">
-                @include('frontend.components.header', ['menu' => $domain->getMenuCategory('header')])
+                @include('frontend.components.header', ['menu' => $domain->getMenuCategory('osnovnoe_meniu')])
             </header>
             <!--/. Header End -->
 
