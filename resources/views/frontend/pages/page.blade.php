@@ -269,11 +269,7 @@
                                             <li class="faq__item">
                                                 <button id="faq-header-{{$key}}" type="button" class="faq__toggle" aria-label="{{ $item }}" aria-expanded="false" aria-controls="faq-panel-{{$key}}" data-accordion-trigger>
                                                     <span class="faq__title">{{ $item }}</span>
-                                                    <span class="faq__icon">
-                                                    <svg aria-hidden="true">
-                                                        <use xlink:href="/static/img/general/sprites/accordion-sprite.svg#arrow-default"></use>
-                                                    </svg>
-                                                </span>
+                                                    <span class="faq__icon"></span>
                                                 </button>
                                                 <div id="faq-panel-{{$key}}" class="faq__body" aria-labelledby="faq-header-{{$key}}" data-accordion-body aria-hidden="true">
                                                     <p>{{ $question->answer[$key] }}</p>

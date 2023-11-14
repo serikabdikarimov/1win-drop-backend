@@ -81,6 +81,7 @@ class Localization extends Model
 
         return $path;
     }
+    
     public function getSettings(){
         return $this->hasOne(DefaultSetting::class, 'locale_id', 'id');
     }

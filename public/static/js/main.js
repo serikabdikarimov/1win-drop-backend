@@ -365,21 +365,23 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
     const mobileMenuDialog = document.querySelector('.mobile-menu');
 
-    function toggleMobileMenuDialog() {
-        document.body.style.overflow = 'hidden';
-        const isOpen = mobileMenuDialog.hasAttribute('open');
-        if (isOpen) {
-            document.body.style.overflow = '';
-            mobileMenuToggle.setAttribute('aria-expanded', false);
-            mobileMenuDialog.removeAttribute('open');
-        } else {
-            mobileMenuToggle.setAttribute('aria-expanded', true);
-            mobileMenuDialog.setAttribute('open', '');
+    if (mobileMenuToggle) {
+        function toggleMobileMenuDialog() {
+            document.body.style.overflow = 'hidden';
+            const isOpen = mobileMenuDialog.hasAttribute('open');
+            if (isOpen) {
+                document.body.style.overflow = '';
+                mobileMenuToggle.setAttribute('aria-expanded', false);
+                mobileMenuDialog.removeAttribute('open');
+            } else {
+                mobileMenuToggle.setAttribute('aria-expanded', true);
+                mobileMenuDialog.setAttribute('open', '');
+            }
         }
-    }
 
-    // Добавляем обработчик события клика на элемент с атрибутом data-mobileMenu-toggle
-    mobileMenuToggle.addEventListener('click', toggleMobileMenuDialog);
+        // Добавляем обработчик события клика на элемент с атрибутом data-mobileMenu-toggle
+        mobileMenuToggle.addEventListener('click', toggleMobileMenuDialog);
+    }
 });
 
 /*
