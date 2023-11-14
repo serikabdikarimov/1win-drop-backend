@@ -18,7 +18,7 @@
     <meta name="revisit-after" content="7 days">
 
     <!-- Favicons -->
-    <link rel="icon" href="{{ $settings->favicon_32 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_32 : '' }}" sizes="any">
+    <link rel="icon" href="{{ $settings->favicon_32 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_32 : '' }}" sizes="any" type="image/png">
     <!-- 32×32 -->
     <link rel="icon" href="{{ $settings->favicon_64 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_64 : '' }}" type="image/svg+xml">
     <!-- 64x64 -->
