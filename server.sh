@@ -20,10 +20,9 @@ else
 fi
 
 # Запрос наименования домена панели администратора
-echo "Введите url фдмин панели:"
+echo "Введите url админ панели:"
 read new_admin_domain
 
-ADMIN_DOMAIN
 # Запрос значений для db_user, db_password и db_name
 echo "Введите название базы данных:"
 read new_db_name

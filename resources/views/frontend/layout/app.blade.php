@@ -18,7 +18,7 @@
     <meta name="revisit-after" content="7 days">
 
     <!-- Favicons -->
-    <link rel="icon" href="{{ $settings->favicon_32 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_32 : '' }}" sizes="any">
+    <link rel="icon" href="{{ $settings->favicon_32 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_32 : '' }}" sizes="any" type="image/png">
     <!-- 32×32 -->
     <link rel="icon" href="{{ $settings->favicon_64 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_64 : '' }}" type="image/svg+xml">
     <!-- 64x64 -->
@@ -287,7 +287,7 @@
         <div class="app__wrapper">
             <!-- Header Begin -->
             <header class="header">
-                @include('frontend.components.header', ['menu' => $domain->getMenuCategory('header')])
+                @include('frontend.components.header', ['menu' => $domain->getMenuCategory('osnovnoe_meniu')])
             </header>
             <!--/. Header End -->
 
