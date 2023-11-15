@@ -31,7 +31,7 @@
                 @php
                     $localizationId = $item->id;
 
-                    if (count($schema) > 0) {
+                    if (count($schema) > 0 && $schema->has($localizationId)) {
                         $currentDomaingData = json_decode($schema[$localizationId]);
                     }
                 @endphp
