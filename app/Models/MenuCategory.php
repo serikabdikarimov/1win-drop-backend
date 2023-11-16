@@ -30,7 +30,14 @@ class MenuCategory extends Model
     protected $fillable = ['name', 'code', 'icon', 'image', 'locale_id', 'is_active', 'description'];
 
     public function items() {
-        return $this->belongsToMany(MenuItem::class)->whereNull('parent_id')->orderBy('position', 'ASC');
+        $localeName = request()->getHost();
+        $localization = Localization::where('locale_name', $localeName)->first();
+
+        if (!$localization) {
+            $localization = Localization::first();
+        }
+
+        return $this->belongsToMany(MenuItem::class)->whereNull('parent_id')->where('locale_id', $localization->id)->orderBy('position', 'ASC');
     }
 
     public function getImage()

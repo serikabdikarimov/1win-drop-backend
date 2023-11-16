@@ -68,13 +68,10 @@ class Localization extends Model
 
     public static function getMenuCategory($code)
     {
-        $localeName = request()->getHost();
-        $localization = Localization::where('locale_name', $localeName)->first();
-        if (!$localization) {
-            $localization = Localization::first();
-        }
-        return MenuCategory::where(['code' => $code, 'locale_id' => $localization->id])->first();
+
+        return MenuCategory::where(['code' => $code])->first();
     }
+
     public static function path($localeId, $slug)
     {
         $path = Page::where(['status' => 2,'locale_id' => $localeId, 'slug' => $slug])->first();
