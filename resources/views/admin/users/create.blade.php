@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <a href="{{ url('/users') }}" title="Назад"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Назад</button></a>
+    <a href="{{ url('/admin/users') }}" title="Назад"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Назад</button></a>
     <br />
     <br />
 
@@ -19,7 +19,7 @@
         </ul>
     @endif
 
-    <form method="POST" action="{{ url('/users') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+    <form method="POST" action="{{ url('/admin/users') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         @include ('admin.users.form', ['formMode' => 'create'])

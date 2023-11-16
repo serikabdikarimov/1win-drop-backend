@@ -7,14 +7,14 @@
     </select>
     {!! $errors->first('user_id', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('brand_id') ? 'has-error' : ''}}">
-    <label for="brand_id" class="control-label">{{ 'Бренд' }}</label>
-    <select name="brand_id" id="brand_id" class="form-control">
-        @foreach($brands as $brand)
-            <option value="{{ $brand->id }}" {{ isset($review->brand_id) && $review->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
+<div class="form-group {{ $errors->has('page_id') ? 'has-error' : ''}}">
+    <label for="page_id" class="control-label">{{ 'Страница' }}</label>
+    <select name="page_id" id="page_id" class="form-control">
+        @foreach($pages as $page)
+            <option value="{{ $page->id }}" {{ isset($review->page_id) && $review->page_id == $page->id ? 'selected' : '' }}>{{ $page->name }}</option>
         @endforeach
     </select>
-    {!! $errors->first('brand_id', '<p class="help-block">:message</p>') !!}
+    {!! $errors->first('page_id', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('message') ? 'has-error' : ''}}">
     <label for="message" class="control-label">{{ 'Комментарий' }}</label>

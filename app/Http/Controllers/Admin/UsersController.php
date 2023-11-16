@@ -61,7 +61,7 @@ class UsersController extends Controller
 
         User::create($requestData);
 
-        return redirect('users')->with('flash_message', 'User added!');
+        return redirect('admin/users')->with('flash_message', 'User added!');
     }
 
     /**
@@ -109,7 +109,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->update($requestData);
 
-        return redirect('users')->with('flash_message', 'User updated!');
+        return redirect('admin/users')->with('flash_message', 'User updated!');
     }
 
     /**

@@ -8,21 +8,21 @@
 
 @section('content')
     @include('flash-message')
-    <a href="{{ url('/reviews/create') }}" class="btn btn-success btn-sm" title="Добавить отзыв">
+    <a href="{{ url('/admin/reviews/create') }}" class="btn btn-success btn-sm" title="Добавить отзыв">
         <i class="fa fa-plus" aria-hidden="true"></i> Добавить
     </a>
 
-    <form method="GET" action="{{ url('/reviews') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+    <form method="GET" action="{{ url('/admin/reviews') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
         <select name="status" id="status" class="form-control">
             <option value="">Статус отзыва</option>
             @foreach ($reviewStatuses as $key => $status)
                 <option value="{{ $key }}">{{ $status }}</option>
             @endforeach
         </select>
-        <select name="brand_id" id="brand_id" class="form-control">
-            <option value="">Выбрать бренд</option>
-            @foreach ($brands as $key => $brand)
-                <option value="{{ $brand->id }}">{{ isset($brand->name) ? $brand->name : 'Нет на pt' }}</option>
+        <select name="page_id" id="page_id" class="form-control">
+            <option value="">Выбрать страницу</option>
+            @foreach ($pages as $key => $page)
+                <option value="{{ $page->id }}">{{ isset($page->name) ? $page->name : 'Нет на pt' }}</option>
             @endforeach
         </select>
         <div class="input-group">
@@ -49,13 +49,13 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->getUser->name }}</td>
-                    <td>{{ $item->getBrand->name }}</td>
+                    <td>{{ $item->getPage->name }}</td>
                     <td>{{ $item->rating }}</td>
                     <td>{{ $item->reviewStatus() }}</td>
                     <td>
-                        <a href="{{ url('/reviews/' . $item->id . '/edit') }}" title="Редактировать отзыв"><button class="btn btn-primary btn-sm"><i class="far fa-edit"></i> Редактировать</button></a>
+                        <a href="{{ url('/admin/reviews/' . $item->id . '/edit') }}" title="Редактировать отзыв"><button class="btn btn-primary btn-sm"><i class="far fa-edit"></i> Редактировать</button></a>
 
-                        <form method="POST" action="{{ url('/reviews' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                        <form method="POST" action="{{ url('/admin/reviews' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger btn-sm" title="Удалить отзыв" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash" aria-hidden="true"></i> Удалить</button>

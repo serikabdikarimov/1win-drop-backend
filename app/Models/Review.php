@@ -33,11 +33,11 @@ class Review extends Model
      *
      * @var array
      */
-    protected $fillable = ['message', 'vote', 'user_id', 'brand_id', 'locale_id', 'is_active', 'created_at', 'updated_at'];
+    protected $fillable = ['message', 'vote', 'user_id', 'page_id', 'locale_id', 'is_active', 'created_at', 'updated_at'];
 
-    public function getBrand()
+    public function getPage()
     {
-        return $this->hasOne(Brand::class, 'id', 'brand_id');
+        return $this->hasOne(Page::class, 'id', 'page_id');
     }
 
     public function getUser()

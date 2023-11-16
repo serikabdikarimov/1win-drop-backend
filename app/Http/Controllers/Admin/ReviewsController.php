@@ -7,6 +7,7 @@ use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
 use App\Models\Brand;
 use App\Models\Localization;
+use App\Models\Page;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,19 +23,19 @@ class ReviewsController extends Controller
     {
         $domainId = session('locale_id') != null ? session('locale_id') : Localization::defaultDomain();
         $keyword = $request->get('search');
-        $brandId = $request->get('brand_id');
+        $pageId = $request->get('page_id');
         $status = $request->get('status');
         $perPage = 25;
 
-        $builder = Review::join('users', 'users.id', 'reviews.user_id')->join('brands', 'brands.id', 'reviews.brand_id')->select('reviews.id', 'reviews.user_id', 'reviews.vote', 'reviews.brand_id', 'reviews.is_active', 'reviews.created_at', 'reviews.locale_id', 'reviews.is_active');
+        $builder = Review::join('users', 'users.id', 'reviews.user_id')->join('pages', 'pages.id', 'reviews.page_id')->select('reviews.id', 'reviews.user_id', 'reviews.vote', 'reviews.page_id', 'reviews.is_active', 'reviews.created_at', 'reviews.locale_id', 'reviews.is_active');
 
         if (!empty($keyword)) {
             $builder->where('users.name', 'LIKE', "%$keyword%")
-                ->orWhere('brands.name', 'LIKE', "%$keyword%");
+                ->orWhere('pages.name', 'LIKE', "%$keyword%");
         }
 
-        if (!empty($brandId)) {
-            $builder->where('reviews.brand_id', $brandId);
+        if (!empty($pageId)) {
+            $builder->where('reviews.page_id', $pageId);
         }
 
         if (!empty($status)) {
@@ -42,10 +43,10 @@ class ReviewsController extends Controller
         }
 
         $reviews = $builder->where('reviews.locale_id', $domainId)->latest()->paginate($perPage);
-        $brands = Brand::where('locale_id', $domainId)->get();
+        $pages = Page::where('locale_id', $domainId)->get();
         $reviewStatuses = Review::REVIEW_STATUSES;
 
-        return view('admin.reviews.index', compact('reviews', 'brands', 'reviewStatuses'));
+        return view('admin.reviews.index', compact('reviews', 'pages', 'reviewStatuses'));
     }
 
     /**
@@ -58,9 +59,9 @@ class ReviewsController extends Controller
         $domainId = session('locale_id') != null ? session('locale_id') : Localization::defaultDomain();
 
         $users = User::where('locale_id', $domainId)->get();
-        $brands = Brand::where('locale_id', $domainId)->get();
+        $pages = Page::where('locale_id', $domainId)->get();
         
-        return view('admin.reviews.create', compact('users', 'brands'));
+        return view('admin.reviews.create', compact('users', 'pages'));
     }
 
     /**
@@ -86,7 +87,7 @@ class ReviewsController extends Controller
 
         Review::create($requestData);
 
-        return redirect('reviews')->with('flash_message', 'Review added!');
+        return redirect('admin/reviews')->with('flash_message', 'Review added!');
     }
 
     /**
@@ -100,10 +101,10 @@ class ReviewsController extends Controller
     {
         $review = Review::findOrFail($id);
         $users = User::all();
-        $brands = Brand::all();
+        $pages = Page::all();
         $reviewStatuses = Review::REVIEW_STATUSES;
 
-        return view('admin.reviews.edit', compact('review', 'users', 'brands', 'reviewStatuses'));
+        return view('admin.reviews.edit', compact('review', 'users', 'pages', 'reviewStatuses'));
     }
 
     /**
@@ -130,7 +131,7 @@ class ReviewsController extends Controller
         $review = Review::findOrFail($id);
         $review->update($requestData);
 
-        return redirect('reviews')->with('flash_message', 'Review updated!');
+        return redirect('admin/reviews')->with('flash_message', 'Review updated!');
     }
 
     /**
@@ -144,6 +145,6 @@ class ReviewsController extends Controller
     {
         Review::destroy($id);
 
-        return redirect('reviews')->with('flash_message', 'Review deleted!');
+        return redirect('admin/reviews')->with('flash_message', 'Review deleted!');
     }
 }
