@@ -23,12 +23,13 @@ class MenuItemsController extends Controller
      */
     public function index(Request $request)
     {
+        $domainId = session('locale_id') != null ? session('locale_id') : Localization::defaultDomain();
         $keyword = $request->get('search');
         $parentId = $request->get('parent_id');
         $categories = $request->get('categories');
         $perPage = 25;
 
-        $builder = MenuItem::select('menu_items.id', 'menu_items.name', 'menu_items.code', 'menu_items.page_id', 'menu_items.created_at', 'menu_items.position');
+        $builder = MenuItem::where('locale_id', $domainId)->select('menu_items.id', 'menu_items.locale_id', 'menu_items.name', 'menu_items.code', 'menu_items.page_id', 'menu_items.created_at', 'menu_items.position');
         if (!empty($keyword)) {
             $builder->join('translates as name', 'name.id', 'menu_items.name')
                 ->where('name.' . env('DEFAULT_LANG'), 'LIKE', "%$keyword%")
