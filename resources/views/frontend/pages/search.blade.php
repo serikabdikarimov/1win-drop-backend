@@ -113,7 +113,7 @@
                                         </ul>
                                         <div class="casino__actions">
                                             @if ($brand->url)
-                                            <a href="{{ $brand->url }}" class="button button--primary" aria-label="{{ __('messages.Сайт')}}">
+                                            <a href="{{ $brand->url }}" rel="noindex nofollow" class="button button--primary" aria-label="{{ __('messages.Сайт')}}">
                                                 <span class="class=button__text">{{ __('messages.Сайт')}}</span>
                                             </a>
                                             @endif

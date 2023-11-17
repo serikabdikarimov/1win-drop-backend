@@ -79,6 +79,9 @@ Route::middleware(['admin', 'checkSiteSettings'])->prefix('admin')->name('admin.
     Route::get('schema', [App\Http\Controllers\Admin\SchemasController::class, 'index']);
     Route::post('schema', [App\Http\Controllers\Admin\SchemasController::class, 'update']);
 
+    Route::get('htaccess', [App\Http\Controllers\Admin\HtaccessController::class, 'index']);
+    Route::patch('htaccess', [App\Http\Controllers\Admin\HtaccessController::class, 'update']);
+
     //Словарь
     Route::resource('dictionary', App\Http\Controllers\Admin\DictionaryController::class)->except(['show']);
 

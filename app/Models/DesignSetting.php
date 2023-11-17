@@ -95,6 +95,10 @@ class DesignSetting extends Model
         'logo_title_background',
         'play_val',
         'play_link',
+        'navigation_link',
+        'navigation_link_hover',
+        'footer_background',
+        'footer_border',
         'locale_id'
     ];
 }

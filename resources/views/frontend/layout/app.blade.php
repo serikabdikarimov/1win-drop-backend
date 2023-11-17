@@ -62,8 +62,22 @@
 
     <!-- Stylesheet -->
     <link href="/static/css/main.min.css?v={{mt_rand(1, 100)}}" rel="stylesheet">
+    @if ($design_settings)
     <style>
         :root {
+            @if ($design_settings->navigation_link)
+                --logo-title: {{ $design_settings->navigation_link }};
+            @endif
+            @if ($design_settings->navigation_link_hover)
+                --logo-title: {{ $design_settings->navigation_link_hover }};
+            @endif
+            @if ($design_settings->footer_background)
+                --logo-title: {{ $design_settings->footer_background }};
+            @endif
+            @if ($design_settings->footer_border)
+                --logo-title: {{ $design_settings->footer_border }};
+            @endif
+
             @if ($design_settings->logo_title)
                 --logo-title: {{ $design_settings->logo_title }};
             @endif
@@ -267,7 +281,7 @@
             @endif
         }
     </style>
-
+    @endif
     <!-- Xml -->
     <link href='/sitemap.xml' rel='alternate' title='Sitemap' type='application/rss+xml'/>
     <!-- Canonical -->
