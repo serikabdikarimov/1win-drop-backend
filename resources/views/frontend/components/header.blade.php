@@ -59,7 +59,7 @@
         </button>
     </nav>
     @endif
-
+    @if ($domains->count() <= 1 && !$design_settings->play_link)
     <ul class="header__right">
         @if ($domains->count() > 1)
         <li class="header__rightItem">
@@ -80,6 +80,7 @@
         </li>
         @endif
     </ul>
+    @endif
     @if($menu)
     <button type="button" class="button button--iconOnly burger" aria-expanded="false" data-mobile-menu-toggle="">
         <span class="burger__line"></span>
