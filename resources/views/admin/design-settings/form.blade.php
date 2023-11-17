@@ -81,6 +81,26 @@
         scss-docs-start components-variables
     </div>
     <div class="card-body">
+        <div class="form-group {{ $errors->has('navigation_link') ? 'has-error' : ''}}">
+            <label for="navigation_link" class="control-label">{{ 'Navigation Link' }}</label>
+            <input class="form-control" name="navigation_link" type="text" id="navigation_link" value="{{ isset($designsetting->navigation_link) ? $designsetting->navigation_link : ''}}" >
+            {!! $errors->first('navigation_link', '<p class="help-block">:message</p>') !!}
+        </div>
+        <div class="form-group {{ $errors->has('navigation_link_hover') ? 'has-error' : ''}}">
+            <label for="navigation_link_hover" class="control-label">{{ 'Navigation Link Hover' }}</label>
+            <input class="form-control" name="navigation_link_hover" type="text" id="navigation_link_hover" value="{{ isset($designsetting->navigation_link_hover) ? $designsetting->navigation_link_hover : ''}}" >
+            {!! $errors->first('navigation_link_hover', '<p class="help-block">:message</p>') !!}
+        </div>
+        <div class="form-group {{ $errors->has('footer_background') ? 'has-error' : ''}}">
+            <label for="footer_background" class="control-label">{{ 'Footer Background' }}</label>
+            <input class="form-control" name="footer_background" type="text" id="footer_background" value="{{ isset($designsetting->footer_background) ? $designsetting->footer_background : ''}}" >
+            {!! $errors->first('footer_background', '<p class="help-block">:message</p>') !!}
+        </div>
+        <div class="form-group {{ $errors->has('footer_border') ? 'has-error' : ''}}">
+            <label for="footer_border" class="control-label">{{ 'Footer Border' }}</label>
+            <input class="form-control" name="footer_border" type="text" id="footer_border" value="{{ isset($designsetting->footer_border) ? $designsetting->footer_border : ''}}" >
+            {!! $errors->first('footer_border', '<p class="help-block">:message</p>') !!}
+        </div>
         <div class="form-group {{ $errors->has('logo_title') ? 'has-error' : ''}}">
             <label for="logo_title" class="control-label">{{ 'Logo Title' }}</label>
             <input class="form-control" name="logo_title" type="text" id="logo_title" value="{{ isset($designsetting->logo_title) ? $designsetting->logo_title : ''}}" >

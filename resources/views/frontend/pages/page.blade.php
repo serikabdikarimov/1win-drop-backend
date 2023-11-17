@@ -240,12 +240,12 @@
                             @elseif (key($blocks) == 'login')
                                 <ul class="buttonGroup buttonGroup--distributionCenter">
                                     <li class="buttonGroup__item">
-                                        <a href="#" class="button button--primary" aria-label="{{ $blocks->login->play->url }}" noindex nofollow>
+                                        <a href="{{ $blocks->login->play->url }}" class="button button--primary" target="_blank" rel="noindex nofollow">
                                             <span class="button__text">{{ $blocks->login->play->name }}</span>
                                         </a>
                                     </li>
                                     <li class="buttonGroup__item">
-                                        <a href="#" class="button button--secondary" aria-label="{{ $blocks->login->register->url }}">
+                                        <a href="{{ $blocks->login->register->url }}" class="button button--secondary" target="_blank" rel="noindex nofollow">
                                             <span class="button__text">{{ $blocks->login->register->name }}</span>
                                         </a>
                                     </li>
