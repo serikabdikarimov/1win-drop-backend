@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        @if($menu && $menu != null)
+        @if($menu->items->count() > 0)
         <div class="footer__col">
             <div class="footer__menuTitle">{{ __('messages.Меню') }}</div>
             <ul class="footer__menu">
