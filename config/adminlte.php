@@ -442,6 +442,12 @@ return [
                     'can'  => ['admin', 'content'],
                 ],
                 [
+                    'text' => 'Htaccess',
+                    'url' => 'admin/htaccess',
+                    'icon' => 'far fa-cogs',
+                    'can'  => ['admin', 'content'],
+                ],
+                [
                     'text' => 'Дизайн',
                     'url' => 'admin/design-settings',
                     'icon' => 'fas fa-cogs',
