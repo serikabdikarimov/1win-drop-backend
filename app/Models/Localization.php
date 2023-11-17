@@ -68,7 +68,6 @@ class Localization extends Model
 
     public static function getMenuCategory($code)
     {
-
         return MenuCategory::where(['code' => $code])->first();
     }
 

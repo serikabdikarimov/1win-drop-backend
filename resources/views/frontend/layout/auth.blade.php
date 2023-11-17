@@ -92,11 +92,11 @@
             </main>
             <!--/. App Main End -->
             @if(!isset($exception)) {{-- Убираем footer --}}
-            <!-- Footer Begin -->
-            <footer class="footer">
-                @include('frontend.components.footer', ['menu' => $domain->getMenuCategory('futer')])
-            </footer>
-           @endif
+                <!-- Footer Begin -->
+                <footer class="footer">
+                    @include('frontend.components.footer', ['menu' => $domain->getMenuCategory('futer')])
+                </footer>
+            @endif
             <div class="app__backdrop"></div>
         </div>
         <!--/. App Wrapper End -->

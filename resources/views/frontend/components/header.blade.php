@@ -59,7 +59,7 @@
         </button>
     </nav>
     @endif
-    @if ($domains->count() > 1 || $design_settings->play_link)
+    @if ($domains->count() > 1 || isset($design_settings) && $design_settings->play_link)
     <ul class="header__right">
         @if ($domains->count() > 1)
         <li class="header__rightItem">

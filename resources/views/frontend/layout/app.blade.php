@@ -6,7 +6,7 @@
     @if (request()->route() && request()->route()->getName() == 'search')
         <title>{{__('messages.Результаты поиска по запросу')}} «{{ request('search') }}»</title>
     @else
-        <title>{{ isset($page->meta_title) ? $page->meta_title : $settings->site_name }}</title>
+        <title>{{ isset($page->meta_title) ? $page->meta_title : '' }}</title>
     @endif
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,20 +18,20 @@
     <meta name="revisit-after" content="7 days">
 
     <!-- Favicons -->
-    <link rel="icon" href="{{ $settings->favicon_32 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_32 : '' }}" sizes="any" type="image/png">
+    <link rel="icon" href="{{ isset($settings) && $settings->favicon_32 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_32 : '' }}" sizes="any" type="image/png">
     <!-- 32×32 -->
-    <link rel="icon" href="{{ $settings->favicon_64 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_64 : '' }}" type="image/svg+xml">
+    <link rel="icon" href="{{ isset($settings) && $settings->favicon_64 != null ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_64 : '' }}" type="image/svg+xml">
     <!-- 64x64 -->
-    <link rel="apple-touch-icon" href="{{ $settings->favicon_180 ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_180 : '' }}">
+    <link rel="apple-touch-icon" href="{{ isset($settings) && $settings->favicon_180 ? '/storage/'. $domain->locale_name .'/' . $settings->favicon_180 : '' }}">
     <!-- 180×180 -->
 
     <link rel="manifest" href="/manifest.webmanifest">
 
-    <meta name="title" content="{{ isset($page) && $page->meta_title != null ? $page->meta_title : $settings->meta_title }}">
-    <meta name="description" content="{{ isset($page) && $page->meta_description != null ? $page->meta_description : $settings->meta_description }}">
-    <meta name="keywords" content="{{ isset($page) && $page->meta_keywords != null ? $page->meta_keywords : $settings->meta_keywords }}">
+    <meta name="title" content="{{ isset($page) && $page->meta_title != null ? $page->meta_title : '' }}">
+    <meta name="description" content="{{ isset($page) && $page->meta_description != null ? $page->meta_description : '' }}">
+    <meta name="keywords" content="{{ isset($page) && $page->meta_keywords != null ? $page->meta_keywords : '' }}">
     {{-- og tags --}}
-    <meta property="og:title" content="{{ isset($page) && $page->meta_title != null ? $page->meta_title : $settings->meta_title }}">
+    <meta property="og:title" content="{{ isset($page) && $page->meta_title != null ? $page->meta_title : '' }}">
     <meta property="og:locale" content="{{ $domain->code }}" />
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ isset($page->title) ? $page->title : env('APP_NAME') }}">
@@ -318,7 +318,7 @@
 
             <!-- Footer Begin -->
             <footer class="footer">
-                @include('frontend.components.footer', ['menu' => $domain->getMenuCategory('footer')])
+                @include('frontend.components.footer', ['menu' => $domain->getMenuCategory('futer')])
             </footer>
 
             <div class="app__backdrop"></div>
